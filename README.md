@@ -4,6 +4,9 @@
 hp-redux is a Hearthstone simulator.
 
 ## Getting Started
+If you are not familiar with Redux these are good resources:
+* https://egghead.io/courses/getting-started-with-redux (first 16 videos)
+* http://redux.js.org/
 
 Read the [wiki](https://github.com/Bebersohl/hp-redux/wiki) to understand the scope of the project.
 
