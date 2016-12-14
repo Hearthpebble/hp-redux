@@ -1,3 +1,5 @@
+/* eslint-env node*/
+
 const { createStore } = require('redux');
 const rootReducer = require('./reducers/index.js');
 

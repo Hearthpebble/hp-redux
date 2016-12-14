@@ -5,8 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --env node || exit 0"
+    "test": "mocha \"test/**/*.js\"",
+    "lint": "eslint . || exit 0"
   },
   "repository": {
     "type": "git",
@@ -23,10 +23,12 @@
     "redux": "^3.6.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "eslint": "^3.12.1",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.8.0"
+    "eslint-plugin-react": "^6.8.0",
+    "mocha": "^3.2.0"
   }
 }
