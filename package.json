@@ -1,0 +1,32 @@
+{
+  "name": "hp-redux",
+  "version": "1.0.0",
+  "patch": "7.0.0.15590",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --env node || exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bebersohl/hp-redux.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bebersohl/hp-redux/issues"
+  },
+  "homepage": "https://github.com/Bebersohl/hp-redux#readme",
+  "dependencies": {
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.12.1",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0"
+  }
+}
