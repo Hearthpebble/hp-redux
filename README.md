@@ -33,7 +33,7 @@ Install the dependencies.
 npm install
 ```
 
-Now that the project is set up you can run index.js and create the store to test your code.
+Now that the project is set up you can run index.js to test your code.
 
 ```
 node src/reducers/index
