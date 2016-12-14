@@ -65,7 +65,7 @@ We use [SemVer](http://semver.org/) for versioning.
 
 * **Brandon Ebersohl** - *Initial work* - [bebersohl](https://github.com/bebersohl)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/Bebersohl/hp-redux/contributors) who participated in this project.
 
 ## License
 
