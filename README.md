@@ -21,7 +21,7 @@ Node.js, which can be installed [here](https://nodejs.org/en/) (get the current 
 Clone the repo.
 
 ```
-git clone https://github.com/Bebersohl/hp-redux/edit/master/README.md
+git clone https://github.com/Bebersohl/hp-redux
 ```
 
 Navigate to your repo.
