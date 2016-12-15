@@ -10,7 +10,7 @@ If you are not familiar with Redux these are good resources:
 
 Read the [wiki](https://github.com/Bebersohl/hp-redux/wiki) to understand the scope of the project.
 
-Read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) before submitting a pull request.
+Read [CONTRIBUTING.md](https://github.com/Bebersohl/hp-redux/blob/master/CONTRIBUTING.md) before submitting a pull request.
 
 ### Prerequisites
 
@@ -58,7 +58,7 @@ npm run lint
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/Bebersohl/hp-redux/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
