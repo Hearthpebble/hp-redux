@@ -14,5 +14,5 @@ We are using Unix line endings so before you do anything set the line ending opt
   * Ensure there are no lint errors. If there are lint errors that aren't appropriate open a new issue.
 6. Push your branch to your fork
 7. Open a pull request
-  * Each pull request should only handle one issue. If you want to solve multiple issues than open multiple pull requests with a different branch for each
+  * Each pull request should only handle one issue. If you want to solve multiple issues then open one pull request per issue
   
