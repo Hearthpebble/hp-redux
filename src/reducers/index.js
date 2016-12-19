@@ -3,6 +3,8 @@
 const { combineReducers } = require('redux');
 const game = require('./game');
 const players = require('./players');
+const heroes = require('./heroes');
+const weapons = require('./weapons');
 const minions = require('./minions');
 const deckCards = require('./deckCards');
 
@@ -11,6 +13,7 @@ const rootReducer = combineReducers({
   deckCardsByIds: deckCards,
   playersById: players,
   heroesById: heroes,
+  weaponsById: weapons,
   minionsById: minions,
 });
 
