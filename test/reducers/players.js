@@ -7,8 +7,6 @@ describe('players reducer', () => {
   it('should return the initial state', () => {
     expect(
       players(undefined, {})
-    ).to.eql({
-      byId: {},
-    });
+    ).to.eql({});
   });
 });

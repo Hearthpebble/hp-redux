@@ -1,8 +1,6 @@
 /* eslint-env node*/
 
-const initialState = {
-  byId: {},
-};
+const initialState = {};
 
 const players = (state = initialState, action) => {
   switch (action.type) {

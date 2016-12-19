@@ -7,7 +7,7 @@ const heroes = require('./heroes');
 
 const rootReducer = combineReducers({
   game,
-  players,
+  playersById: players,
   heroesById: heroes,
 });
 
