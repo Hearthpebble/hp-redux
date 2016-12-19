@@ -10,7 +10,7 @@ const deckCards = require('./deckCards');
 
 const rootReducer = combineReducers({
   game,
-  deckCardsByIds: deckCards,
+  deckCardsById: deckCards,
   playersById: players,
   heroesById: heroes,
   weaponsById: weapons,

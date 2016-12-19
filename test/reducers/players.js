@@ -9,4 +9,5 @@ describe('players reducer', () => {
       players(undefined, {})
     ).to.eql({});
   });
+  it('should handle ADD_PLAYER', () => {});
 });

@@ -1,4 +1,5 @@
 /* eslint-env node*/
+
 const shortid = require('shortid');
 
 const ADD_PLAYER = exports.ADD_PLAYER = 'ADD_PLAYER';

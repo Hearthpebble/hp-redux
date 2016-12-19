@@ -13,4 +13,5 @@ describe('game reducer', () => {
       currentSequenceId: 0,
     });
   });
+  it('should handle ADD_PLAYER', () => {});
 });

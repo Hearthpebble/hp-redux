@@ -9,4 +9,5 @@ describe('heroes reducer', () => {
       heroes(undefined, {})
     ).to.eql({});
   });
+  it('should handle ADD_PLAYER', () => {});
 });
