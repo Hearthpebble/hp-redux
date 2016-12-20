@@ -1,8 +1,10 @@
 /* eslint-env node*/
 
 const { createStore } = require('redux');
-const rootReducer = require('./reducers/index.js');
+const rootReducer = require('./reducers/index');
+const actions = require('./actions');
 
 let store = createStore(rootReducer);
-
-console.log(JSON.stringify(store.getState(), null, 2));
+let unsubscribe = store.subscribe(() => {
+  console.log(JSON.stringify(store.getState(), null, 2));
+});
