@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   heroesById: heroes,
   weaponsById: weapons,
   minionsById: minions,
-  secretsById: secrets
+  secretsById: secrets,
 });
 
 module.exports = rootReducer;
