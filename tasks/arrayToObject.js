@@ -7,8 +7,8 @@ const newJson = {};
 
 // sort the array by id
 json.sort((a, b) => {
-  const idA = a.id;
-  const idB = b.id;
+  const idA = a.id.toUpperCase();
+  const idB = b.id.toUpperCase();
 
   if (idA > idB) {
     return 1;
@@ -21,9 +21,14 @@ json.sort((a, b) => {
   return 0;
 });
 
-// iterate through the array
+// iterate through the array and add to new object
 json.forEach((i) => {
-  newJson[i.id] = i;
+
+  // add the card object
+  newJson[i.id.toUpperCase()] = i;
+
+  // force the id to uppercase
+  newJson[i.id.toUpperCase()].id = i.id.toUpperCase();
 });
 
 // stringify the new object
