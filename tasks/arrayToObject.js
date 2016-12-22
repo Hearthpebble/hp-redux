@@ -1,14 +1,14 @@
 // get the old array, store it in json variable
-const json = require('../data/oldCardsArray.json');
+let cards = require('../data/oldCardsArray.json');
 const fs = require('fs');
 
-// new object to write
-const newJson = {};
+// map array and change id to uppercase
+cards = cards.map(card => Object.assign({}, card, { id: card.id.toUpperCase() }));
 
 // sort the array by id
-json.sort((a, b) => {
-  const idA = a.id.toUpperCase();
-  const idB = b.id.toUpperCase();
+cards.sort((a, b) => {
+  const idA = a.id;
+  const idB = b.id;
 
   if (idA > idB) {
     return 1;
@@ -17,26 +17,24 @@ json.sort((a, b) => {
     return -1;
   }
 
-// if id's are equal
+  // if id's are equal
   return 0;
 });
 
+// new object to write
+const newCards = {};
+
 // iterate through the array and add to new object
-json.forEach((i) => {
-
-  // add the card object
-  newJson[i.id.toUpperCase()] = i;
-
-  // force the id to uppercase
-  newJson[i.id.toUpperCase()].id = i.id.toUpperCase();
+cards.forEach((card) => {
+  newCards[card.id] = card;
 });
 
 // stringify the new object
-const newJsonPretty = JSON.stringify(newJson, null, 2);
+const newCardsPretty = JSON.stringify(newCards, null, 2);
 
 // write the object to a file
-fs.writeFile('../data/cards.json', newJsonPretty, (err) => {
+fs.writeFile('../data/cards.json', newCardsPretty, (err) => {
   if (err) {
-    throw (err);
+    throw err;
   }
 });
