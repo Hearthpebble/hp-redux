@@ -60,10 +60,6 @@ npm run lint
 
 Please read [CONTRIBUTING.md](https://github.com/Bebersohl/hp-redux/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning.
-
 ## Authors
 
 * **Brandon Ebersohl** - *Initial work* - [bebersohl](https://github.com/bebersohl)
