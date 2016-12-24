@@ -3,6 +3,7 @@ const { shuffle, mapValues } = require('lodash');
 const {
   ADD_PLAYER,
   SHUFFLE_DECKS,
+  SUMMON,
 } = require('../actions');
 
 const initialState = {};
@@ -34,6 +35,18 @@ const players = (state = initialState, action) => {
           deck: shuffle(player.deck),
         })
       );
+    case SUMMON:
+      return Object.assign({}, state, {
+        [action.playerId]: {
+          HEY: 'HEY'
+        }
+        // minions: [
+        //   ...state[action.playerId].minions.slice(o, position),
+        //   action.minionId,
+        //   ...state[action.playerId].minions.slice(position),
+        // ]
+      });
+
     default:
       return state;
   }

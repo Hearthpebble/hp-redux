@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const players = require('../../src/reducers/players');
-const { addPlayer, shuffleDecks } = require('../../src/actions');
+const { addPlayer, shuffleDecks, summon } = require('../../src/actions');
 const { playersById } = require('../testData');
 
 describe('players reducer', () => {
@@ -58,5 +58,11 @@ describe('players reducer', () => {
       // this has a small chance of failing if both decks happen to shuffle to the same arrays
       expect(playerState[player].deck).to.not.eql(playersById[player].deck);
     });
+  });
+  it('should handle SUMMON', () => {
+    const action = { minionId } = summon('playerId1', 0, 'CS2_231');
+    const playerState = players(playersById, action);
+    console.log(playerState);
+    expect(playerState['playerId1'].minions).to.eql([minionId]);
   });
 });
