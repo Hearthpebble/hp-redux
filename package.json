@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Bebersohl/hp-redux#readme",
   "dependencies": {
+    "lodash": "^4.17.2",
     "redux": "^3.6.0",
     "shortid": "^2.2.6"
   },

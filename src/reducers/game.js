@@ -11,12 +11,10 @@ const initialState = {
 const game = (state = initialState, action) => {
   const { players } = state;
   switch (action.type) {
-    case ADD_PLAYER: {
-      const { playerId } = action;
+    case ADD_PLAYER: 
       return Object.assign({}, state, {
-        players: [...players, playerId],
+        players: [...players, action.playerId],
       });
-    }
     default:
       return state;
   }

@@ -1,6 +1,9 @@
 /* eslint-env node*/
-
-const { ADD_PLAYER } = require('../actions');
+const { shuffle, mapValues } = require('lodash');
+const {
+  ADD_PLAYER,
+  SHUFFLE_DECKS,
+} = require('../actions');
 
 const initialState = {};
 
@@ -25,6 +28,12 @@ const players = (state = initialState, action) => {
         },
       });
     }
+    case SHUFFLE_DECKS:
+      return mapValues(state, player =>
+        Object.assign({}, player, {
+          deck: shuffle(player.deck),
+        })
+      );
     default:
       return state;
   }
