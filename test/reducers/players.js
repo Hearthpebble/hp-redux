@@ -2,7 +2,8 @@
 
 const { expect } = require('chai');
 const players = require('../../src/reducers/players');
-const { addPlayer } = require('../../src/actions');
+const { addPlayer, shuffleDecks } = require('../../src/actions');
+const { playersById } = require('../testData');
 
 describe('players reducer', () => {
   it('should return the initial state', () => {
@@ -44,5 +45,18 @@ describe('players reducer', () => {
       name: 'Tom',
     });
     expect(Object.keys(playerState)).to.have.lengthOf(2);
+  });
+  it('should handle SHUFFLE_DECKS', () => {
+    const action = shuffleDecks();
+    const playerState = players(playersById, action);
+    Object.keys(playerState).forEach((player) => {
+      expect(playerState[player].deck).to.include.members([
+        'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10',
+        'c11', 'c12', 'c13', 'c14', 'c15', 'c16', 'c17', 'c18', 'c19', 'c20',
+        'c21', 'c22', 'c23', 'c24', 'c25', 'c26', 'c27', 'c28', 'c29', 'c30',
+      ]);
+      // this has a small chance of failing if both decks happen to shuffle to the same arrays
+      expect(playerState[player].deck).to.not.eql(playersById[player].deck);
+    });
   });
 });
