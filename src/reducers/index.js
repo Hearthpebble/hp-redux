@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   playersById: players,
   heroesById: heroes,
   weaponsById: weapons,
-  minionsById: minions,
+  minions,
   secretsById: secrets,
 });
 

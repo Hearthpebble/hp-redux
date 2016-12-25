@@ -1,8 +1,10 @@
 /* eslint-env node*/
 const { shuffle, mapValues } = require('lodash');
+const merge = require('lodash/fp/merge');
 const {
   ADD_PLAYER,
   SHUFFLE_DECKS,
+  SUMMON,
 } = require('../actions');
 
 const initialState = {};
@@ -11,7 +13,7 @@ const players = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLAYER: {
       const { playerId, heroId, deck, name } = action;
-      return Object.assign({}, state, {
+      return merge(state, {
         [playerId]: {
           id: playerId,
           hero: heroId,
@@ -30,10 +32,21 @@ const players = (state = initialState, action) => {
     }
     case SHUFFLE_DECKS:
       return mapValues(state, player =>
-        Object.assign({}, player, {
+        merge(player, {
           deck: shuffle(player.deck),
         })
       );
+    case SUMMON:
+      return merge(state, {
+        [action.playerId]: {
+          minions: [
+            ...state[action.playerId].minions.slice(0, action.position),
+            action.minionId,
+            ...state[action.playerId].minions.slice(action.position),
+          ],
+        },
+      });
+
     default:
       return state;
   }

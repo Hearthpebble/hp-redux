@@ -4,6 +4,7 @@ const { expect } = require('chai');
 const {
   ADD_PLAYER, addPlayer,
   SHUFFLE_DECKS, shuffleDecks,
+  SUMMON, summon,
 } = require('../src/actions');
 
 describe('actions', () => {
@@ -25,6 +26,18 @@ describe('actions', () => {
       const action = shuffleDecks();
       expect(action).to.eql({
         type: SHUFFLE_DECKS,
+      });
+    });
+  });
+  describe('SUMMON', () => {
+    it('should create an action to summon a minion ', () => {
+      const action = { minionId } = summon('playerId', 0, 'cardId');
+      expect(action).to.eql({
+        type: SUMMON,
+        minionId,
+        playerId: 'playerId',
+        position: 0,
+        cardId: 'cardId',
       });
     });
   });
