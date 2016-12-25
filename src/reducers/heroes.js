@@ -1,6 +1,7 @@
 /* eslint-env node*/
 
 const { ADD_PLAYER } = require('../actions');
+const merge = require('lodash/fp/merge');
 
 const initialState = {};
 
@@ -8,7 +9,7 @@ const heroes = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLAYER: {
       const { heroId, playerClass } = action;
-      return Object.assign({}, state, {
+      return merge(state, {
         [heroId]: {
           id: heroId,
           playerClass,

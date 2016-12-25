@@ -11,7 +11,6 @@ describe('game reducer', () => {
     ).to.eql({
       players: [],
       activePlayer: 0,
-      currentSequenceId: 0,
     });
   });
   it('should handle ADD_PLAYER', () => {
@@ -21,13 +20,11 @@ describe('game reducer', () => {
     expect(gameState).to.eql({
       players: [playerId1],
       activePlayer: 0,
-      currentSequenceId: 0,
     });
     gameState = game(gameState, action2);
     expect(gameState).to.eql({
       players: [playerId1, playerId2],
       activePlayer: 0,
-      currentSequenceId: 0,
     });
   });
 });
