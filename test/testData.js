@@ -1,4 +1,4 @@
-exports.playersById = {
+exports.initialPlayerState = {
   playerId1: {
     id: 'playerId1',
     hero: 'heroId1',
@@ -34,5 +34,40 @@ exports.playersById = {
     mana: 0,
     maxMana: 10,
     name: 'Walker',
+  },
+};
+
+exports.initialHeroState = {
+  heroId1: {
+    id: 'heroId1',
+    playerClass: 'Mage',
+    weapon: null,
+    maxHealth: 30,
+    health: 30,
+    fatigue: 0,
+    armor: 0,
+    attack: 0,
+    immune: false,
+    frozenFor: 0,
+    usedWindfury: false,
+    alreadyAttacked: false,
+    effects: [],
+    auras: [],
+  },
+  heroId2: {
+    id: 'heroId2',
+    playerClass: 'Hunter',
+    weapon: null,
+    maxHealth: 30,
+    health: 30,
+    fatigue: 0,
+    armor: 0,
+    attack: 0,
+    immune: false,
+    frozenFor: 0,
+    usedWindfury: false,
+    alreadyAttacked: false,
+    effects: [],
+    auras: [],
   },
 };
