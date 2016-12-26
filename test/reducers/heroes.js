@@ -2,7 +2,8 @@
 
 const { expect } = require('chai');
 const heroes = require('../../src/reducers/heroes');
-const { addPlayer } = require('../../src/actions');
+const { addPlayer, fatigue } = require('../../src/actions');
+const { initialHeroState } = require('../testData');
 
 describe('heroes reducer', () => {
   it('should return the initial state', () => {
@@ -11,14 +12,16 @@ describe('heroes reducer', () => {
     ).to.eql({});
   });
   it('should handle ADD_PLAYER', () => {
-    const action1 = { heroId: heroId1 } = addPlayer('Mage', ['cardId1', 'cardId2', 'cardId3'], 'Bob');
+    const action = { heroId: heroId1 } = addPlayer('Mage', ['cardId1', 'cardId2', 'cardId3'], 'Bob');
     const action2 = { heroId: heroId2 } = addPlayer('Druid', ['cardId1', 'cardId2', 'cardId3'], 'Tom');
-    let heroState = heroes(undefined, action1);
+    let heroState = heroes(undefined, action);
     expect(heroState[heroId1]).to.eql({
       id: heroId1,
       playerClass: 'Mage',
       weapon: null,
+      maxHealth: 30,
       health: 30,
+      fatigue: 0,
       armor: 0,
       attack: 0,
       immune: false,
@@ -33,7 +36,9 @@ describe('heroes reducer', () => {
       id: heroId2,
       playerClass: 'Druid',
       weapon: null,
+      maxHealth: 30,
       health: 30,
+      fatigue: 0,
       armor: 0,
       attack: 0,
       immune: false,
@@ -44,5 +49,42 @@ describe('heroes reducer', () => {
       auras: [],
     });
     expect(Object.keys(heroState)).to.have.lengthOf(2);
+  });
+  it('should handle FATIGUE', () => {
+    const action = fatigue('heroId1');
+    let heroState = heroes(initialHeroState, action);
+    expect(heroState.heroId1).to.eql({
+      id: 'heroId1',
+      playerClass: 'Mage',
+      weapon: null,
+      maxHealth: 30,
+      health: 29,
+      fatigue: 1,
+      armor: 0,
+      attack: 0,
+      immune: false,
+      frozenFor: 0,
+      usedWindfury: false,
+      alreadyAttacked: false,
+      effects: [],
+      auras: [],
+    });
+    heroState = heroes(heroState, action);
+    expect(heroState.heroId1).to.eql({
+      id: 'heroId1',
+      playerClass: 'Mage',
+      weapon: null,
+      maxHealth: 30,
+      health: 27,
+      fatigue: 2,
+      armor: 0,
+      attack: 0,
+      immune: false,
+      frozenFor: 0,
+      usedWindfury: false,
+      alreadyAttacked: false,
+      effects: [],
+      auras: [],
+    });
   });
 });

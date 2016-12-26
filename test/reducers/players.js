@@ -3,7 +3,7 @@
 const { expect } = require('chai');
 const players = require('../../src/reducers/players');
 const { addPlayer, shuffleDecks, summon } = require('../../src/actions');
-const { playersById: initialState } = require('../testData');
+const { initialPlayerState } = require('../testData');
 
 describe('players reducer', () => {
   it('should return the initial state', () => {
@@ -48,7 +48,7 @@ describe('players reducer', () => {
   });
   it('should handle SHUFFLE_DECKS', () => {
     const action = shuffleDecks();
-    const playerState = players(initialState, action);
+    const playerState = players(initialPlayerState, action);
     Object.keys(playerState).forEach((player) => {
       expect(playerState[player].deck).to.include.members([
         'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10',
@@ -56,7 +56,7 @@ describe('players reducer', () => {
         'c21', 'c22', 'c23', 'c24', 'c25', 'c26', 'c27', 'c28', 'c29', 'c30',
       ]);
       // this has a small chance of failing if both decks happen to shuffle to the same arrays
-      expect(playerState[player].deck).to.not.eql(initialState[player].deck);
+      expect(playerState[player].deck).to.not.eql(initialPlayerState[player].deck);
     });
   });
   it('should handle SUMMON', () => {
@@ -68,7 +68,7 @@ describe('players reducer', () => {
     const action6 = { minionId: minionId6 } = summon('playerId2', 0, 'cardId');
     const action7 = { minionId: minionId7 } = summon('playerId2', 2, 'cardId');
     const action8 = { minionId: minionId8 } = summon('playerId2', 1, 'cardId');
-    let playerState = players(initialState, action1);
+    let playerState = players(initialPlayerState, action1);
     expect(playerState.playerId1.minions).to.eql([minionId1]);
     playerState = players(playerState, action2);
     expect(playerState.playerId1.minions).to.eql([minionId2, minionId1]);
@@ -76,7 +76,7 @@ describe('players reducer', () => {
     expect(playerState.playerId1.minions).to.eql([minionId2, minionId1, minionId3]);
     playerState = players(playerState, action4);
     expect(playerState.playerId1.minions).to.eql([minionId2, minionId4, minionId1, minionId3]);
-    playerState = players(initialState, action5);
+    playerState = players(initialPlayerState, action5);
     expect(playerState.playerId2.minions).to.eql([minionId5]);
     playerState = players(playerState, action6);
     expect(playerState.playerId2.minions).to.eql([minionId6, minionId5]);

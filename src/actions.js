@@ -3,6 +3,7 @@
 const shortid = require('shortid');
 
 const ADD_PLAYER = exports.ADD_PLAYER = 'ADD_PLAYER';
+const FATIGUE = exports.FATIGUE = 'FATIGUE';
 const SHUFFLE_DECKS = exports.SHUFFLE_DECKS = 'SHUFFLE_DECKS';
 const SUMMON = exports.SUMMON = 'SUMMON';
 
@@ -13,6 +14,11 @@ exports.addPlayer = (playerClass, deck, name) => ({
   playerClass,
   deck,
   name,
+});
+
+exports.fatigue = heroId => ({
+  type: FATIGUE,
+  heroId,
 });
 
 exports.shuffleDecks = () => ({
