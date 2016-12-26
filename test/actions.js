@@ -3,6 +3,7 @@
 const { expect } = require('chai');
 const {
   ADD_PLAYER, addPlayer,
+  BURN_CARD, burnCard,
   FATIGUE, fatigue,
   SHUFFLE_DECKS, shuffleDecks,
   SUMMON, summon,
@@ -19,6 +20,16 @@ describe('actions', () => {
         playerClass: 'Mage',
         deck: ['cardId1', 'cardId2', 'cardId3'],
         name: 'Bob',
+      });
+    });
+  });
+  describe('BURN_CARD', () => {
+    it('should create an action to burn a card', () => {
+      const action = burnCard('playerId', 3);
+      expect(action).to.eql({
+        type: BURN_CARD,
+        playerId: 'playerId',
+        count: 3,
       });
     });
   });
