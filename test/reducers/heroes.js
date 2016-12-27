@@ -51,40 +51,17 @@ describe('heroes reducer', () => {
     expect(Object.keys(heroState)).to.have.lengthOf(2);
   });
   it('should handle FATIGUE', () => {
-    const action = fatigue('heroId1');
-    let heroState = heroes(initialHeroState, action);
-    expect(heroState.heroId1).to.eql({
-      id: 'heroId1',
-      playerClass: 'Mage',
-      weapon: null,
-      maxHealth: 30,
-      health: 29,
-      fatigue: 1,
-      armor: 0,
-      attack: 0,
-      immune: false,
-      frozenFor: 0,
-      usedWindfury: false,
-      alreadyAttacked: false,
-      effects: [],
-      auras: [],
-    });
-    heroState = heroes(heroState, action);
-    expect(heroState.heroId1).to.eql({
-      id: 'heroId1',
-      playerClass: 'Mage',
-      weapon: null,
-      maxHealth: 30,
-      health: 27,
-      fatigue: 2,
-      armor: 0,
-      attack: 0,
-      immune: false,
-      frozenFor: 0,
-      usedWindfury: false,
-      alreadyAttacked: false,
-      effects: [],
-      auras: [],
-    });
+    const action1 = fatigue('heroId1', 1);
+    const action2 = fatigue('heroId1', 2);
+    let heroState = heroes(initialHeroState, action1);
+    expect(heroState.heroId1.fatigue).to.equal(1);
+    expect(heroState.heroId1.health).to.equal(29);
+    heroState = heroes(heroState, action1);
+    expect(heroState.heroId1.fatigue).to.equal(2);
+    expect(heroState.heroId1.health).to.equal(27);
+    heroState = heroes(heroState, action2);
+    expect(heroState.heroId1.fatigue).to.equal(4);
+    expect(heroState.heroId1.health).to.equal(20);
+    expect(heroState.heroId1).to.contain.all.keys(['id', 'health']);
   });
 });

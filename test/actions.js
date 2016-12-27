@@ -35,10 +35,11 @@ describe('actions', () => {
   });
   describe('FATIGUE', () => {
     it('should create an action to fatigue a hero ', () => {
-      const action = fatigue('heroId');
+      const action = fatigue('heroId', 3);
       expect(action).to.eql({
         type: FATIGUE,
         heroId: 'heroId',
+        count: 3,
       });
     });
   });
