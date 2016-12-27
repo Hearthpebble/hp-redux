@@ -23,9 +23,10 @@ exports.burnCard = (playerId, count) => ({
   count,
 });
 
-exports.fatigue = heroId => ({
+exports.fatigue = (heroId, count) => ({
   type: FATIGUE,
   heroId,
+  count,
 });
 
 exports.shuffleDecks = () => ({

@@ -2,6 +2,7 @@
 
 const { ADD_PLAYER, FATIGUE } = require('../actions');
 const merge = require('lodash/fp/merge');
+const times = require('lodash/times');
 
 const initialState = {};
 
@@ -29,8 +30,13 @@ const heroes = (state = initialState, action) => {
       });
     }
     case FATIGUE: {
-      const newFatigue = state[action.heroId].fatigue + 1;
-      const newHealth = state[action.heroId].health - newFatigue;
+      let newFatigue = state[action.heroId].fatigue;
+      let newHealth = state[action.heroId].health;
+      times(action.count, () => {
+        newFatigue += 1;
+        newHealth -= newFatigue;
+      });
+
       return merge(state, {
         [action.heroId]: {
           fatigue: newFatigue,
