@@ -4,6 +4,7 @@ const { expect } = require('chai');
 const {
   ADD_PLAYER, addPlayer,
   BURN_CARD, burnCard,
+  DRAW_CARD, drawCard,
   FATIGUE, fatigue,
   SHUFFLE_DECKS, shuffleDecks,
   SUMMON, summon,
@@ -28,6 +29,16 @@ describe('actions', () => {
       const action = burnCard('playerId', 3);
       expect(action).to.eql({
         type: BURN_CARD,
+        playerId: 'playerId',
+        count: 3,
+      });
+    });
+  });
+  describe('DRAW_CARD', () => {
+    it('should create an action to draw a card', () => {
+      const action = drawCard('playerId', 3);
+      expect(action).to.eql({
+        type: DRAW_CARD,
         playerId: 'playerId',
         count: 3,
       });

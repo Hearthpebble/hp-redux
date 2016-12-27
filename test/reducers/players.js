@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const players = require('../../src/reducers/players');
-const { addPlayer, burnCard, shuffleDecks, summon } = require('../../src/actions');
+const { addPlayer, burnCard, drawCard, shuffleDecks, summon } = require('../../src/actions');
 const { initialPlayerState } = require('../testData');
 
 describe('players reducer', () => {
@@ -56,6 +56,17 @@ describe('players reducer', () => {
     playerState = players(playerState, action2);
     expect(playerState.playerId1.deck).to.have.lengthOf(24);
     expect(playerState.playerId1.graveyard).to.eql(['c25', 'c26', 'c27', 'c28', 'c29', 'c30']);
+  });
+  it('should handle DRAW_CARD', () => {
+    const action1 = drawCard('playerId1', 1);
+    const action2 = drawCard('playerId1', 5);
+    let playerState = players(initialPlayerState, action1);
+    expect(playerState.playerId1.deck).to.have.lengthOf(29);
+    expect(playerState.playerId1.hand).to.have.lengthOf(1);
+    expect(playerState.playerId1).to.contain.all.keys(['id', 'name']);
+    playerState = players(playerState, action2);
+    expect(playerState.playerId1.deck).to.have.lengthOf(24);
+    expect(playerState.playerId1.hand).to.eql(['c25', 'c26', 'c27', 'c28', 'c29', 'c30']);
   });
   it('should handle SHUFFLE_DECKS', () => {
     const action = shuffleDecks();
