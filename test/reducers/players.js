@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const players = require('../../src/reducers/players');
-const { addPlayer, burnCard, drawCard, shuffleDecks, summon } = require('../../src/actions');
+const { addPlayer, burnCard, drawCard, gainMana, shuffleDecks, summon } = require('../../src/actions');
 const { initialPlayerState } = require('../testData');
 
 describe('players reducer', () => {
@@ -67,6 +67,14 @@ describe('players reducer', () => {
     playerState = players(playerState, action2);
     expect(playerState.playerId1.deck).to.have.lengthOf(24);
     expect(playerState.playerId1.hand).to.eql(['c25', 'c26', 'c27', 'c28', 'c29', 'c30']);
+  });
+  it('should handle GAIN_MANA', () => {
+    const action1 = gainMana('playerId1', 1);
+    const action2 = gainMana('playerId2', 11);
+    let playerState = players(initialPlayerState, action1);
+    expect(playerState.playerId1.mana).to.eql(1);
+    playerState = players(initialPlayerState, action2);
+    expect(playerState.playerId2.mana).to.eql(10);
   });
   it('should handle SHUFFLE_DECKS', () => {
     const action = shuffleDecks();

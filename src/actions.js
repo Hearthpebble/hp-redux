@@ -6,6 +6,7 @@ const ADD_PLAYER = exports.ADD_PLAYER = 'ADD_PLAYER';
 const BURN_CARD = exports.BURN_CARD = 'BURN_CARD';
 const DRAW_CARD = exports.DRAW_CARD = 'DRAW_CARD';
 const FATIGUE = exports.FATIGUE = 'FATIGUE';
+const GAIN_MANA = exports.GAIN_MANA = 'GAIN_MANA';
 const SHUFFLE_DECKS = exports.SHUFFLE_DECKS = 'SHUFFLE_DECKS';
 const SUMMON = exports.SUMMON = 'SUMMON';
 
@@ -34,6 +35,12 @@ exports.fatigue = (heroId, count) => ({
   type: FATIGUE,
   heroId,
   count,
+});
+
+exports.gainMana = (playerId, mana) => ({
+  type: GAIN_MANA,
+  playerId,
+  mana,
 });
 
 exports.shuffleDecks = () => ({

@@ -5,6 +5,7 @@ const {
   ADD_PLAYER,
   BURN_CARD,
   DRAW_CARD,
+  GAIN_MANA,
   SHUFFLE_DECKS,
   SUMMON,
 } = require('../actions');
@@ -57,6 +58,18 @@ const players = (state = initialState, action) => {
             ...deck.slice(-action.count),
             ...state[action.playerId].hand,
           ],
+        }),
+      });
+    }
+    case GAIN_MANA: {
+      let newMana = action.mana + state[action.playerId].mana;
+      if (newMana > 10) {
+        newMana = 10;
+      }
+
+      return Object.assign({}, state, {
+        [action.playerId]: Object.assign({}, state[action.playerId], {
+          mana: newMana,
         }),
       });
     }
