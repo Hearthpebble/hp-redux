@@ -67,10 +67,10 @@ const players = (state = initialState, action) => {
         newMana = 10;
       }
 
-      return Object.assign({}, state, {
-        [action.playerId]: Object.assign({}, state[action.playerId], {
+      return merge(state, {
+        [action.playerId]: {
           mana: newMana,
-        }),
+        },
       });
     }
     case SHUFFLE_DECKS:

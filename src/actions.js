@@ -37,7 +37,7 @@ exports.fatigue = (heroId, count) => ({
   count,
 });
 
-exports.gainMana = (playerId, mana) => ({
+exports.gainMana = (playerId, mana = 1) => ({
   type: GAIN_MANA,
   playerId,
   mana,

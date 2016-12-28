@@ -69,12 +69,19 @@ describe('players reducer', () => {
     expect(playerState.playerId1.hand).to.eql(['c25', 'c26', 'c27', 'c28', 'c29', 'c30']);
   });
   it('should handle GAIN_MANA', () => {
+    const action0 = gainMana('playerId1');
     const action1 = gainMana('playerId1', 1);
-    const action2 = gainMana('playerId2', 11);
-    let playerState = players(initialPlayerState, action1);
-    expect(playerState.playerId1.mana).to.eql(1);
-    playerState = players(initialPlayerState, action2);
-    expect(playerState.playerId2.mana).to.eql(10);
+    const action2 = gainMana('playerId1', 2);
+    const action3 = gainMana('playerId1', 11);
+    let playerState = players(initialPlayerState, action0);
+    expect(playerState.playerId1.mana).to.equal(1);
+    playerState = players(playerState, action1);
+    expect(playerState.playerId1.mana).to.equal(2);
+    playerState = players(playerState, action2);
+    expect(playerState.playerId1.mana).to.equal(4);
+    playerState = players(playerState, action3);
+    expect(playerState.playerId1.mana).to.equal(10);
+    expect(playerState.playerId1).to.contain.all.keys(['id', 'name']);
   });
   it('should handle SHUFFLE_DECKS', () => {
     const action = shuffleDecks();
