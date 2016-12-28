@@ -6,6 +6,7 @@ const {
   BURN_CARD, burnCard,
   DRAW_CARD, drawCard,
   FATIGUE, fatigue,
+  GAIN_MANA, gainMana,
   SHUFFLE_DECKS, shuffleDecks,
   SUMMON, summon,
 } = require('../src/actions');
@@ -51,6 +52,16 @@ describe('actions', () => {
         type: FATIGUE,
         heroId: 'heroId',
         count: 3,
+      });
+    });
+  });
+  describe('GAIN_MANA', () => {
+    it('should create an action to add mana', () => {
+      const action = gainMana('playerId', 5);
+      expect(action).to.eql({
+        type: GAIN_MANA,
+        playerId: 'playerId',
+        mana: 5,
       });
     });
   });

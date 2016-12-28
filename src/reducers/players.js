@@ -5,6 +5,7 @@ const {
   ADD_PLAYER,
   BURN_CARD,
   DRAW_CARD,
+  GAIN_MANA,
   SHUFFLE_DECKS,
   SUMMON,
 } = require('../actions');
@@ -58,6 +59,18 @@ const players = (state = initialState, action) => {
             ...state[action.playerId].hand,
           ],
         }),
+      });
+    }
+    case GAIN_MANA: {
+      let newMana = action.mana + state[action.playerId].mana;
+      if (newMana > 10) {
+        newMana = 10;
+      }
+
+      return merge(state, {
+        [action.playerId]: {
+          mana: newMana,
+        },
       });
     }
     case SHUFFLE_DECKS:
