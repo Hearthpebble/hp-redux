@@ -37,28 +37,28 @@ const players = (state = initialState, action) => {
       });
     }
     case BURN_CARD: {
-      const deck = state[action.playerId].deck;
+      const { deck } = state[action.playerId];
       return Object.assign({}, state, {
         [action.playerId]: Object.assign({}, state[action.playerId], {
           deck: [
-            ...deck.slice(0, deck.length - action.count),
+            ...deck.slice(0, deck.length - 1),
           ],
           graveyard: [
-            ...deck.slice(-action.count),
+            ...deck.slice(-1),
             ...state[action.playerId].graveyard,
           ],
         }),
       });
     }
     case DRAW_CARD: {
-      const deck = state[action.playerId].deck;
+      const { deck } = state[action.playerId];
       return Object.assign({}, state, {
         [action.playerId]: Object.assign({}, state[action.playerId], {
           deck: [
-            ...deck.slice(0, deck.length - action.count),
+            ...deck.slice(0, deck.length - 1),
           ],
           hand: [
-            ...deck.slice(-action.count),
+            ...deck.slice(-1),
             ...state[action.playerId].hand,
           ],
         }),

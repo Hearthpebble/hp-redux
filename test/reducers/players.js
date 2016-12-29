@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const players = require('../../src/reducers/players');
-const { addPlayer, burnCard, drawCard, gainMana, shuffleDecks, summon } = require('../../src/actions');
+const { addPlayer, BURN_CARD, DRAW_CARD, gainMana, shuffleDecks, summon } = require('../../src/actions');
 const { initialPlayerState } = require('../testData');
 
 describe('players reducer', () => {
@@ -51,26 +51,30 @@ describe('players reducer', () => {
     expect(Object.keys(playerState)).to.have.lengthOf(2);
   });
   it('should handle BURN_CARD', () => {
-    const action1 = burnCard('playerId1', 1);
-    const action2 = burnCard('playerId1', 5);
+    const action1 = {
+      type: BURN_CARD,
+      playerId: 'playerId1',
+    };
     let playerState = players(initialPlayerState, action1);
     expect(playerState.playerId1.deck).to.have.lengthOf(29);
     expect(playerState.playerId1.graveyard).to.have.lengthOf(1);
     expect(playerState.playerId1).to.contain.all.keys(['id', 'name']);
-    playerState = players(playerState, action2);
-    expect(playerState.playerId1.deck).to.have.lengthOf(24);
-    expect(playerState.playerId1.graveyard).to.eql(['c25', 'c26', 'c27', 'c28', 'c29', 'c30']);
+    playerState = players(playerState, action1);
+    expect(playerState.playerId1.deck).to.have.lengthOf(28);
+    expect(playerState.playerId1.graveyard).to.eql(['c29', 'c30']);
   });
   it('should handle DRAW_CARD', () => {
-    const action1 = drawCard('playerId1', 1);
-    const action2 = drawCard('playerId1', 5);
+    const action1 = {
+      type: DRAW_CARD,
+      playerId: 'playerId1',
+    };
     let playerState = players(initialPlayerState, action1);
     expect(playerState.playerId1.deck).to.have.lengthOf(29);
     expect(playerState.playerId1.hand).to.have.lengthOf(1);
     expect(playerState.playerId1).to.contain.all.keys(['id', 'name']);
-    playerState = players(playerState, action2);
-    expect(playerState.playerId1.deck).to.have.lengthOf(24);
-    expect(playerState.playerId1.hand).to.eql(['c25', 'c26', 'c27', 'c28', 'c29', 'c30']);
+    playerState = players(playerState, action1);
+    expect(playerState.playerId1.deck).to.have.lengthOf(28);
+    expect(playerState.playerId1.hand).to.eql(['c29', 'c30']);
   });
   it('should handle GAIN_MANA', () => {
     const action0 = gainMana('playerId1');
