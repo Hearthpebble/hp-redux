@@ -15,6 +15,9 @@ const initialState = {};
 const players = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLAYER: {
+      if (Object.keys(state).length === 2) {
+        return state;
+      }
       const { playerId, heroId, deck, name } = action;
       return merge(state, {
         [playerId]: {

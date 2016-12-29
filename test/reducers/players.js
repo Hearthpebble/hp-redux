@@ -14,6 +14,7 @@ describe('players reducer', () => {
   it('should handle ADD_PLAYER', () => {
     const action1 = { playerId: playerId1, heroId: heroId1 } = addPlayer('Mage', ['cardId1', 'cardId2', 'cardId3'], 'Bob');
     const action2 = { playerId: playerId2, heroId: heroId2 } = addPlayer('Druid', ['cardId1', 'cardId2', 'cardId3'], 'Tom');
+    const action3 = { playerId: playerId3, heroId: heroId3 } = addPlayer('Hunter', ['cardId1', 'cardId2', 'cardId3'], 'Jon');
     let playerState = players(undefined, action1);
     expect(playerState[playerId1]).to.eql({
       id: playerId1,
@@ -44,6 +45,9 @@ describe('players reducer', () => {
       maxMana: 10,
       name: 'Tom',
     });
+    expect(Object.keys(playerState)).to.have.lengthOf(2);
+    // should not add more than 2 players
+    playerState = players(playerState, action3);
     expect(Object.keys(playerState)).to.have.lengthOf(2);
   });
   it('should handle BURN_CARD', () => {

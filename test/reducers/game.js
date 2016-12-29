@@ -26,5 +26,8 @@ describe('game reducer', () => {
       players: [playerId1, playerId2],
       activePlayer: 0,
     });
+    // it should not add more than 2 players
+    gameState = game(gameState, action2);
+    expect(gameState.players).to.have.lengthOf(2);
   });
 });
