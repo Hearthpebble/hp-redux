@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const heroes = require('../../src/reducers/heroes');
-const { addPlayer, fatigue } = require('../../src/actions');
+const { addPlayer, FATIGUE } = require('../../src/actions');
 const { initialHeroState } = require('../testData');
 
 describe('heroes reducer', () => {
@@ -51,17 +51,19 @@ describe('heroes reducer', () => {
     expect(Object.keys(heroState)).to.have.lengthOf(2);
   });
   it('should handle FATIGUE', () => {
-    const action1 = fatigue('heroId1', 1);
-    const action2 = fatigue('heroId1', 2);
+    const action1 = {
+      type: FATIGUE,
+      heroId: 'heroId1',
+    };
     let heroState = heroes(initialHeroState, action1);
     expect(heroState.heroId1.fatigue).to.equal(1);
     expect(heroState.heroId1.health).to.equal(29);
     heroState = heroes(heroState, action1);
     expect(heroState.heroId1.fatigue).to.equal(2);
     expect(heroState.heroId1.health).to.equal(27);
-    heroState = heroes(heroState, action2);
-    expect(heroState.heroId1.fatigue).to.equal(4);
-    expect(heroState.heroId1.health).to.equal(20);
+    heroState = heroes(heroState, action1);
+    expect(heroState.heroId1.fatigue).to.equal(3);
+    expect(heroState.heroId1.health).to.equal(24);
     expect(heroState.heroId1).to.contain.all.keys(['id', 'health']);
   });
 });

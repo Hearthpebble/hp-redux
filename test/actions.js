@@ -1,15 +1,19 @@
 /* eslint-env mocha*/
 
 const { expect } = require('chai');
+const configureStore = require('redux-mock-store').default;
+const reduxThunk = require('redux-thunk').default;
 const {
   ADD_PLAYER, addPlayer,
-  BURN_CARD, burnCard,
+  BURN_CARD,
   DRAW_CARD, drawCard,
-  FATIGUE, fatigue,
+  FATIGUE,
   GAIN_MANA, gainMana,
   SHUFFLE_DECKS, shuffleDecks,
   SUMMON, summon,
 } = require('../src/actions');
+
+const mockStore = configureStore([reduxThunk]);
 
 describe('actions', () => {
   describe('ADD_PLAYER', () => {
@@ -25,33 +29,54 @@ describe('actions', () => {
       });
     });
   });
-  describe('BURN_CARD', () => {
-    it('should create an action to burn a card', () => {
-      const action = burnCard('playerId', 3);
-      expect(action).to.eql({
-        type: BURN_CARD,
-        playerId: 'playerId',
-        count: 3,
-      });
-    });
-  });
   describe('DRAW_CARD', () => {
     it('should create an action to draw a card', () => {
-      const action = drawCard('playerId', 3);
+      const store = mockStore({
+        playersById: {
+          playerId1: {
+            deck: ['c1'],
+            hand: [],
+          },
+        },
+      });
+      store.dispatch(drawCard('playerId1'));
+      const action = store.getActions()[0];
       expect(action).to.eql({
         type: DRAW_CARD,
-        playerId: 'playerId',
-        count: 3,
+        playerId: 'playerId1',
       });
     });
-  });
-  describe('FATIGUE', () => {
-    it('should create an action to fatigue a hero ', () => {
-      const action = fatigue('heroId', 3);
+    it('should create an action to burn a card', () => {
+      const store = mockStore({
+        playersById: {
+          playerId1: {
+            deck: ['c1'],
+            hand: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8', 'h9', 'h10'],
+          },
+        },
+      });
+      store.dispatch(drawCard('playerId1'));
+      const action = store.getActions()[0];
+      expect(action).to.eql({
+        type: BURN_CARD,
+        playerId: 'playerId1',
+      });
+    });
+    it('should create an action to fatigue a hero', () => {
+      const store = mockStore({
+        playersById: {
+          playerId1: {
+            deck: [],
+            hand: [],
+            heroId: 'heroId1',
+          },
+        },
+      });
+      store.dispatch(drawCard('playerId1'));
+      const action = store.getActions()[0];
       expect(action).to.eql({
         type: FATIGUE,
-        heroId: 'heroId',
-        count: 3,
+        heroId: 'heroId1',
       });
     });
   });

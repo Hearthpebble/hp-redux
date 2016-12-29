@@ -19,23 +19,25 @@ exports.addPlayer = (playerClass, deck, name) => ({
   name,
 });
 
-exports.burnCard = (playerId, count) => ({
-  type: BURN_CARD,
-  playerId,
-  count,
-});
-
-exports.drawCard = (playerId, count) => ({
-  type: DRAW_CARD,
-  playerId,
-  count,
-});
-
-exports.fatigue = (heroId, count) => ({
-  type: FATIGUE,
-  heroId,
-  count,
-});
+exports.drawCard = playerId => (dispatch, getState) => {
+  const { deck, hand, heroId } = getState().playersById[playerId];
+  if (deck.length === 0) {
+    dispatch({
+      type: FATIGUE,
+      heroId,
+    });
+  } else if (hand.length === 10) {
+    dispatch({
+      type: BURN_CARD,
+      playerId,
+    });
+  } else {
+    dispatch({
+      type: DRAW_CARD,
+      playerId,
+    });
+  }
+};
 
 exports.gainMana = (playerId, mana = 1) => ({
   type: GAIN_MANA,
