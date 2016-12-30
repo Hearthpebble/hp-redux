@@ -1,6 +1,6 @@
 /* eslint-env node*/
 
-const { ADD_PLAYER, FATIGUE } = require('../actions');
+const { ADD_PLAYER, FATIGUE, KILL } = require('../actions');
 const merge = require('lodash/fp/merge');
 
 const initialState = {};
@@ -36,6 +36,11 @@ const heroes = (state = initialState, action) => {
           health: health - (fatigue + 1),
         },
       });
+    }
+    case KILL: {
+      const copy = Object.assign({}, state);
+      delete copy[action.characterId];
+      return copy;
     }
     default:
       return state;

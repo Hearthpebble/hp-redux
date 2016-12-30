@@ -5,10 +5,12 @@ const configureStore = require('redux-mock-store').default;
 const reduxThunk = require('redux-thunk').default;
 const {
   ADD_PLAYER, addPlayer,
+  ADD_TO_GRAVEYARD,
   BURN_CARD,
   DRAW_CARD, drawCard,
   FATIGUE,
   GAIN_MANA, gainMana,
+  KILL, kill,
   SHUFFLE_DECKS, shuffleDecks,
   SUMMON, summon,
 } = require('../src/actions');
@@ -87,6 +89,44 @@ describe('actions', () => {
         type: GAIN_MANA,
         playerId: 'playerId',
         mana: 5,
+      });
+    });
+  });
+  describe('KILL', () => {
+    it('should create an action to add a minion to the graveyard', () => {
+      const store = mockStore({
+        minions: {
+          minionsById: {
+            minionId1: {
+              cardId: 'minionId1',
+            },
+          },
+        },
+        playersById: {
+          playerId1: {
+            id: 'playerId1',
+            minions: ['minionId1'],
+          },
+        },
+      });
+      store.dispatch(kill('minionId1'));
+      const actions = store.getActions();
+      expect(actions[0]).to.eql({
+        type: ADD_TO_GRAVEYARD,
+        cardId: 'minionId1',
+        playerId: 'playerId1',
+      });
+      expect(actions).to.have.lengthOf(2);
+    });
+    it('should create an action to kill a character', () => {
+      const store = mockStore({
+        playersById: {},
+      });
+      store.dispatch(kill('minionId1'));
+      const action = store.getActions()[0];
+      expect(action).to.eql({
+        type: KILL,
+        characterId: 'minionId1',
       });
     });
   });

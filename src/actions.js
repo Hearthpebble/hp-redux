@@ -3,10 +3,12 @@
 const shortid = require('shortid');
 
 const ADD_PLAYER = exports.ADD_PLAYER = 'ADD_PLAYER';
+const ADD_TO_GRAVEYARD = exports.ADD_TO_GRAVEYARD = 'ADD_TO_GRAVEYARD';
 const BURN_CARD = exports.BURN_CARD = 'BURN_CARD';
 const DRAW_CARD = exports.DRAW_CARD = 'DRAW_CARD';
 const FATIGUE = exports.FATIGUE = 'FATIGUE';
 const GAIN_MANA = exports.GAIN_MANA = 'GAIN_MANA';
+const KILL = exports.KILL = 'KILL';
 const SHUFFLE_DECKS = exports.SHUFFLE_DECKS = 'SHUFFLE_DECKS';
 const SUMMON = exports.SUMMON = 'SUMMON';
 
@@ -44,6 +46,25 @@ exports.gainMana = (playerId, mana = 1) => ({
   playerId,
   mana,
 });
+
+exports.kill = characterId => (dispatch, getState) => {
+  const { playersById, minions } = getState();
+  const playerKey = Object.keys(playersById).find(key =>
+    playersById[key].minions.includes(characterId)
+  );
+
+  if (playerKey) {
+    dispatch({
+      type: ADD_TO_GRAVEYARD,
+      cardId: minions.minionsById[characterId].cardId,
+      playerId: playersById[playerKey].id,
+    });
+  }
+  dispatch({
+    type: KILL,
+    characterId,
+  });
+};
 
 exports.shuffleDecks = () => ({
   type: SHUFFLE_DECKS,

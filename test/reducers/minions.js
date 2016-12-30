@@ -2,7 +2,8 @@
 
 const { expect } = require('chai');
 const minions = require('../../src/reducers/minions');
-const { summon } = require('../../src/actions');
+const { KILL, summon } = require('../../src/actions');
+const { initialMinionState } = require('../testData');
 
 describe('minions reducer', () => {
   it('should return the initial state', () => {
@@ -12,6 +13,14 @@ describe('minions reducer', () => {
       currentSequenceId: 0,
       minionsById: {},
     });
+  });
+  it('should handle KILL', () => {
+    const action1 = {
+      type: KILL,
+      characterId: 'minionId1',
+    };
+    const minionState = minions(initialMinionState, action1);
+    expect(minionState.minionsById).to.eql({});
   });
   it('should handle SUMMON', () => {
     const action1 = { minionId: minionId1 } = summon('playerId1', 0, 'CS2_231'); // wisp
@@ -23,6 +32,7 @@ describe('minions reducer', () => {
       minionsById: {
         [minionId1]: {
           id: minionId1,
+          cardId: 'CS2_231',
           name: 'Wisp',
           sequenceId: 1,
           maxHealth: 1,
@@ -44,6 +54,7 @@ describe('minions reducer', () => {
       minionsById: {
         [minionId1]: {
           id: minionId1,
+          cardId: 'CS2_231',
           name: 'Wisp',
           sequenceId: 1,
           maxHealth: 1,
@@ -59,6 +70,7 @@ describe('minions reducer', () => {
         },
         [minionId2]: {
           id: minionId2,
+          cardId: 'EX1_556',
           name: 'Harvest Golem',
           sequenceId: 2,
           maxHealth: 3,
@@ -80,6 +92,7 @@ describe('minions reducer', () => {
       minionsById: {
         [minionId1]: {
           id: minionId1,
+          cardId: 'CS2_231',
           name: 'Wisp',
           sequenceId: 1,
           maxHealth: 1,
@@ -95,6 +108,7 @@ describe('minions reducer', () => {
         },
         [minionId2]: {
           id: minionId2,
+          cardId: 'EX1_556',
           name: 'Harvest Golem',
           sequenceId: 2,
           maxHealth: 3,
@@ -110,6 +124,7 @@ describe('minions reducer', () => {
         },
         [minionId3]: {
           id: minionId3,
+          cardId: 'NEW1_030',
           name: 'Deathwing',
           sequenceId: 3,
           maxHealth: 12,
