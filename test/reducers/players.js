@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const players = require('../../src/reducers/players');
-const { addPlayer, BURN_CARD, DRAW_CARD, gainMana, shuffleDecks, summon } = require('../../src/actions');
+const { addPlayer, ADD_TO_GRAVEYARD, BURN_CARD, DRAW_CARD, gainMana, shuffleDecks, summon } = require('../../src/actions');
 const { initialPlayerState } = require('../testData');
 
 describe('players reducer', () => {
@@ -49,6 +49,15 @@ describe('players reducer', () => {
     // should not add more than 2 players
     playerState = players(playerState, action3);
     expect(Object.keys(playerState)).to.have.lengthOf(2);
+  });
+  it('should handle ADD_TO_GRAVEYARD', () => {
+    const action1 = {
+      type: ADD_TO_GRAVEYARD,
+      cardId: 'cardId1',
+      playerId: 'playerId1',
+    };
+    playerState = players(initialPlayerState, action1);
+    expect(playerState.playerId1.graveyard).to.eql(['cardId1']);
   });
   it('should handle BURN_CARD', () => {
     const action1 = {

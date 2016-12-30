@@ -3,6 +3,7 @@ const { shuffle, mapValues } = require('lodash');
 const merge = require('lodash/fp/merge');
 const {
   ADD_PLAYER,
+  ADD_TO_GRAVEYARD,
   BURN_CARD,
   DRAW_CARD,
   GAIN_MANA,
@@ -36,6 +37,12 @@ const players = (state = initialState, action) => {
         },
       });
     }
+    case ADD_TO_GRAVEYARD:
+      return merge(state, {
+        [action.playerId]: {
+          graveyard: [...state[action.playerId].graveyard, action.cardId],
+        },
+      });
     case BURN_CARD: {
       const { deck } = state[action.playerId];
       return Object.assign({}, state, {

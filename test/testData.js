@@ -1,3 +1,25 @@
+exports.initialMinionState = {
+  currentSequenceId: 0,
+  minionsById: {
+    minionId1: {
+      id: 'minionId1',
+      cardId: 'CS2_231',
+      name: 'Wisp',
+      sequenceId: 1,
+      maxHealth: 1,
+      health: 1,
+      attack: 1,
+      divineShield: false,
+      exhausted: true,
+      alreadyAttacked: false,
+      windfuryUsed: false,
+      frozenFor: 0,
+      effects: [],
+      auras: [],
+    },
+  },
+};
+
 exports.initialPlayerState = {
   playerId1: {
     id: 'playerId1',

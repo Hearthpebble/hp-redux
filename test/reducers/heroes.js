@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const heroes = require('../../src/reducers/heroes');
-const { addPlayer, FATIGUE } = require('../../src/actions');
+const { addPlayer, FATIGUE, KILL } = require('../../src/actions');
 const { initialHeroState } = require('../testData');
 
 describe('heroes reducer', () => {
@@ -65,5 +65,13 @@ describe('heroes reducer', () => {
     expect(heroState.heroId1.fatigue).to.equal(3);
     expect(heroState.heroId1.health).to.equal(24);
     expect(heroState.heroId1).to.contain.all.keys(['id', 'health']);
+  });
+  it('should handle KILL', () => {
+    const action1 = {
+      type: KILL,
+      characterId: 'heroId1',
+    };
+    const heroState = heroes(initialHeroState, action1);
+    expect(heroState).to.have.all.keys(['heroId2']);
   });
 });
