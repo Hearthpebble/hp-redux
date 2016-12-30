@@ -1,5 +1,7 @@
 /* eslint-env node*/
-const { KILL, SUMMON } = require('../actions');
+
+const { KILL, SUMMON, FREEZE } = require('../actions');
+
 const merge = require('lodash/fp/merge');
 const cards = require('../../data/cards.json');
 
@@ -14,6 +16,21 @@ const minions = (state = initialState, action) => {
       const copy = Object.assign({}, state);
       delete copy.minionsById[action.characterId];
       return copy;
+    }
+    case FREEZE: {
+      const frozenIds = action.ids;
+      const newFreeze = {
+        minionsById: {},
+      };
+
+      frozenIds.forEach((id) => {
+        if (state.minionsById[id] !== undefined) {
+          newFreeze.minionsById[id] = {
+            frozenFor: action.frozenFor,
+          };
+        }
+      });
+      return merge(state, newFreeze);
     }
     case SUMMON: {
       const card = cards[action.cardId];

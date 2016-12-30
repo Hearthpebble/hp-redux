@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const minions = require('../../src/reducers/minions');
-const { KILL, summon } = require('../../src/actions');
+const { KILL, freeze, summon } = require('../../src/actions');
 const { initialMinionState } = require('../testData');
 
 describe('minions reducer', () => {
@@ -12,6 +12,113 @@ describe('minions reducer', () => {
     ).to.eql({
       currentSequenceId: 0,
       minionsById: {},
+    });
+  });
+  it('should handle FREEZE', () => {
+    const summon1 = { minionId: minionId1 } = summon('playerId1', 0, 'CS2_231'); // wisp
+    const summon2 = { minionId: minionId2 } = summon('playerId1', 1, 'EX1_556'); // harvest golem
+    const action1 = freeze(1, minionId1);
+    const action2 = freeze(2, minionId2);
+    const action3 = freeze(3, minionId1, minionId2, 'heroId1', 'heroId2');
+    let minionState = minions(undefined, summon1);
+    minionState = minions(minionState, action1);
+    expect(minionState).to.eql({
+      currentSequenceId: 1,
+      minionsById: {
+        [minionId1]: {
+          id: minionId1,
+          cardId: 'CS2_231',
+          name: 'Wisp',
+          sequenceId: 1,
+          maxHealth: 1,
+          health: 1,
+          attack: 1,
+          divineShield: false,
+          exhausted: true,
+          alreadyAttacked: false,
+          windfuryUsed: false,
+          frozenFor: 1,
+          effects: [],
+          auras: [],
+        },
+      },
+    });
+    minionState = minions(minionState, summon2);
+    minionState = minions(minionState, action2);
+    expect(minionState).to.eql({
+      currentSequenceId: 2,
+      minionsById: {
+        [minionId1]: {
+          id: minionId1,
+          cardId: 'CS2_231',
+          name: 'Wisp',
+          sequenceId: 1,
+          maxHealth: 1,
+          health: 1,
+          attack: 1,
+          divineShield: false,
+          exhausted: true,
+          alreadyAttacked: false,
+          windfuryUsed: false,
+          frozenFor: 1,
+          effects: [],
+          auras: [],
+        },
+        [minionId2]: {
+          id: minionId2,
+          cardId: 'EX1_556',
+          name: 'Harvest Golem',
+          sequenceId: 2,
+          maxHealth: 3,
+          health: 3,
+          attack: 2,
+          divineShield: false,
+          exhausted: true,
+          alreadyAttacked: false,
+          windfuryUsed: false,
+          frozenFor: 2,
+          effects: [],
+          auras: [],
+        },
+      },
+    });
+    minionState = minions(minionState, action3);
+    expect(minionState).to.eql({
+      currentSequenceId: 2,
+      minionsById: {
+        [minionId1]: {
+          id: minionId1,
+          cardId: 'CS2_231',
+          name: 'Wisp',
+          sequenceId: 1,
+          maxHealth: 1,
+          health: 1,
+          attack: 1,
+          divineShield: false,
+          exhausted: true,
+          alreadyAttacked: false,
+          windfuryUsed: false,
+          frozenFor: 3,
+          effects: [],
+          auras: [],
+        },
+        [minionId2]: {
+          id: minionId2,
+          cardId: 'EX1_556',
+          name: 'Harvest Golem',
+          sequenceId: 2,
+          maxHealth: 3,
+          health: 3,
+          attack: 2,
+          divineShield: false,
+          exhausted: true,
+          alreadyAttacked: false,
+          windfuryUsed: false,
+          frozenFor: 3,
+          effects: [],
+          auras: [],
+        },
+      },
     });
   });
   it('should handle KILL', () => {

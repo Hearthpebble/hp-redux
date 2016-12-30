@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const heroes = require('../../src/reducers/heroes');
-const { addPlayer, FATIGUE, KILL } = require('../../src/actions');
+const { addPlayer, FATIGUE, KILL, freeze } = require('../../src/actions');
 const { initialHeroState } = require('../testData');
 
 describe('heroes reducer', () => {
@@ -25,7 +25,7 @@ describe('heroes reducer', () => {
       armor: 0,
       attack: 0,
       immune: false,
-      frozenFor: 0,
+      frozen: false,
       usedWindfury: false,
       alreadyAttacked: false,
       effects: [],
@@ -42,7 +42,7 @@ describe('heroes reducer', () => {
       armor: 0,
       attack: 0,
       immune: false,
-      frozenFor: 0,
+      frozen: false,
       usedWindfury: false,
       alreadyAttacked: false,
       effects: [],
@@ -65,6 +65,17 @@ describe('heroes reducer', () => {
     expect(heroState.heroId1.fatigue).to.equal(3);
     expect(heroState.heroId1.health).to.equal(24);
     expect(heroState.heroId1).to.contain.all.keys(['id', 'health']);
+  });
+  it('should handle FREEZE', () => {
+    const action1 = freeze(1, 'heroId1');
+    const action2 = freeze(2, 'heroId1', 'heroId2', 'mId1', 'mId2');
+    let heroState = heroes(initialHeroState, action1);
+    expect(heroState.heroId1.frozenFor).to.equal(1);
+    expect(heroState.heroId2.frozenFor).to.equal(0);
+    heroState = heroes(heroState, action2);
+    expect(heroState.heroId1.frozenFor).to.equal(2);
+    expect(heroState.heroId2.frozenFor).to.equal(2);
+    expect(heroState.heroId1).to.contain.all.keys(['id', 'frozenFor']);
   });
   it('should handle KILL', () => {
     const action1 = {

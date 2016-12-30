@@ -7,6 +7,7 @@ const ADD_TO_GRAVEYARD = exports.ADD_TO_GRAVEYARD = 'ADD_TO_GRAVEYARD';
 const BURN_CARD = exports.BURN_CARD = 'BURN_CARD';
 const DRAW_CARD = exports.DRAW_CARD = 'DRAW_CARD';
 const FATIGUE = exports.FATIGUE = 'FATIGUE';
+const FREEZE = exports.FREEZE = 'FREEZE';
 const GAIN_MANA = exports.GAIN_MANA = 'GAIN_MANA';
 const KILL = exports.KILL = 'KILL';
 const SHUFFLE_DECKS = exports.SHUFFLE_DECKS = 'SHUFFLE_DECKS';
@@ -40,6 +41,12 @@ exports.drawCard = playerId => (dispatch, getState) => {
     });
   }
 };
+
+exports.freeze = (frozenFor, ...ids) => ({
+  type: FREEZE,
+  frozenFor,
+  ids,
+});
 
 exports.gainMana = (playerId, mana = 1) => ({
   type: GAIN_MANA,
