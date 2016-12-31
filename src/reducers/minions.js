@@ -18,13 +18,12 @@ const minions = (state = initialState, action) => {
       return copy;
     }
     case FREEZE: {
-      const frozenIds = action.ids;
       const newFreeze = {
         minionsById: {},
       };
 
-      frozenIds.forEach((id) => {
-        if (state.minionsById[id] !== undefined) {
+      action.characterIds.forEach((id) => {
+        if (state.minionsById.hasOwnProperty(id)) {
           newFreeze.minionsById[id] = {
             frozenFor: action.frozenFor,
           };

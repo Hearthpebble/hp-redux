@@ -20,7 +20,7 @@ const heroes = (state = initialState, action) => {
           armor: 0,
           attack: 0,
           immune: false,
-          frozen: false,
+          frozenFor: 0,
           usedWindfury: false,
           alreadyAttacked: false,
           effects: [],
@@ -43,11 +43,10 @@ const heroes = (state = initialState, action) => {
       return copy;
     }
     case FREEZE: {
-      const frozenIds = action.ids;
       const newFreeze = {};
 
-      frozenIds.forEach((id) => {
-        if (state[id] !== undefined) {
+      action.characterIds.forEach((id) => {
+        if (state.hasOwnProperty(id)) {
           newFreeze[id] = {
             frozenFor: action.frozenFor,
           };

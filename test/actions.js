@@ -84,20 +84,12 @@ describe('actions', () => {
     });
   });
   describe('FREEZE', () => {
-    it('should create an action to freeze a hero/minion', () => {
-      const action = freeze(1, 'heroId1', 'heroId2');
-      expect(action).to.eql({
-        type: FREEZE,
-        ids: ['heroId1', 'heroId2'],
-        frozenFor: 1,
-      });
-    });
-    it('sohuld create an action to freeze several heroes/minions', () => {
+    it('should create an action to freeze several characters', () => {
       const action = freeze(2, 'mId1', 'mId2', 'heroId1', 'heroId2');
       expect(action).to.eql({
         type: FREEZE,
         frozenFor: 2,
-        ids: ['mId1', 'mId2', 'heroId1', 'heroId2'],
+        characterIds: ['mId1', 'mId2', 'heroId1', 'heroId2'],
       });
     });
   });

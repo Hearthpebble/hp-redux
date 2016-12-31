@@ -42,10 +42,10 @@ exports.drawCard = playerId => (dispatch, getState) => {
   }
 };
 
-exports.freeze = (frozenFor, ...ids) => ({
+exports.freeze = (frozenFor, ...characterIds) => ({
   type: FREEZE,
   frozenFor,
-  ids,
+  characterIds,
 });
 
 exports.gainMana = (playerId, mana = 1) => ({

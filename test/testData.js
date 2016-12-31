@@ -17,6 +17,22 @@ exports.initialMinionState = {
       effects: [],
       auras: [],
     },
+    minionId2: {
+      id: 'minionId2',
+      cardId: 'CS2_196',
+      name: 'Razorfen Hunter',
+      sequenceId: 2,
+      maxHealth: 3,
+      health: 3,
+      attack: 2,
+      divineShield: false,
+      exhausted: true,
+      alreadyAttacked: false,
+      windfuryUsed: false,
+      frozenFor: 0,
+      effects: [],
+      auras: [],
+    },
   },
 };
 
