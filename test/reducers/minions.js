@@ -32,7 +32,7 @@ describe('minions reducer', () => {
       characterId: 'minionId1',
     };
     const minionState = minions(initialMinionState, action1);
-    expect(Object.keys(minionState.minionsById)).to.have.length.of(1);
+    expect(Object.keys(minionState.minionsById)).to.have.lengthOf(1);
   });
   it('should handle SUMMON', () => {
     const action1 = { minionId: minionId1 } = summon('playerId1', 0, 'CS2_231'); // wisp
