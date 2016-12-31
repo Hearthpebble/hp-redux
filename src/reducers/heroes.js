@@ -1,6 +1,6 @@
 /* eslint-env node*/
 
-const { ADD_PLAYER, FATIGUE, KILL } = require('../actions');
+const { ADD_PLAYER, FATIGUE, FREEZE, KILL } = require('../actions');
 const merge = require('lodash/fp/merge');
 
 const initialState = {};
@@ -41,6 +41,19 @@ const heroes = (state = initialState, action) => {
       const copy = Object.assign({}, state);
       delete copy[action.characterId];
       return copy;
+    }
+    case FREEZE: {
+      const newFreeze = {};
+
+      action.characterIds.forEach((id) => {
+        if (state.hasOwnProperty(id)) {
+          newFreeze[id] = {
+            frozenFor: action.frozenFor,
+          };
+        }
+      });
+
+      return merge(state, newFreeze);
     }
     default:
       return state;

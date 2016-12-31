@@ -9,6 +9,7 @@ const {
   BURN_CARD,
   DRAW_CARD, drawCard,
   FATIGUE,
+  FREEZE, freeze,
   GAIN_MANA, gainMana,
   KILL, kill,
   SHUFFLE_DECKS, shuffleDecks,
@@ -79,6 +80,16 @@ describe('actions', () => {
       expect(action).to.eql({
         type: FATIGUE,
         heroId: 'heroId1',
+      });
+    });
+  });
+  describe('FREEZE', () => {
+    it('should create an action to freeze several characters', () => {
+      const action = freeze(2, 'mId1', 'mId2', 'heroId1', 'heroId2');
+      expect(action).to.eql({
+        type: FREEZE,
+        frozenFor: 2,
+        characterIds: ['mId1', 'mId2', 'heroId1', 'heroId2'],
       });
     });
   });

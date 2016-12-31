@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const minions = require('../../src/reducers/minions');
-const { KILL, summon } = require('../../src/actions');
+const { KILL, freeze, summon } = require('../../src/actions');
 const { initialMinionState } = require('../testData');
 
 describe('minions reducer', () => {
@@ -14,13 +14,25 @@ describe('minions reducer', () => {
       minionsById: {},
     });
   });
+  it('should handle FREEZE', () => {
+    const action1 = freeze(1, 'minionId1');
+    const action2 = freeze(2, 'minionId2');
+    const action3 = freeze(3, 'minionId1', 'minionId2', 'heroId1', 'heroId2');
+    let minionState = minions(initialMinionState, action1);
+    expect(minionState.minionsById.minionId1.frozenFor).to.equal(1);
+    minionState = minions(minionState, action2);
+    expect(minionState.minionsById.minionId2.frozenFor).to.equal(2);
+    minionState = minions(minionState, action3);
+    expect(minionState.minionsById.minionId1.frozenFor).to.equal(3);
+    expect(minionState.minionsById.minionId2.frozenFor).to.equal(3);
+  });
   it('should handle KILL', () => {
     const action1 = {
       type: KILL,
       characterId: 'minionId1',
     };
     const minionState = minions(initialMinionState, action1);
-    expect(minionState.minionsById).to.eql({});
+    expect(Object.keys(minionState.minionsById)).to.have.lengthOf(1);
   });
   it('should handle SUMMON', () => {
     const action1 = { minionId: minionId1 } = summon('playerId1', 0, 'CS2_231'); // wisp
