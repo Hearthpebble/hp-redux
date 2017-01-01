@@ -8,6 +8,7 @@ const weapons = require('./weapons');
 const minions = require('./minions');
 const secrets = require('./secrets');
 const deckCards = require('./deckCards');
+const effects = require('./effects');
 
 const rootReducer = combineReducers({
   game,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   weaponsById: weapons,
   minions,
   secretsById: secrets,
+  effectsById: effects,
 });
 
 module.exports = rootReducer;

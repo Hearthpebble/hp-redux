@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const minions = require('../../src/reducers/minions');
-const { KILL, freeze, summon } = require('../../src/actions');
+const { addEffect, KILL, freeze, summon } = require('../../src/actions');
 const { initialMinionState } = require('../testData');
 
 describe('minions reducer', () => {
@@ -13,6 +13,11 @@ describe('minions reducer', () => {
       currentSequenceId: 0,
       minionsById: {},
     });
+  });
+  it('should handle ADD_EFFECT', () => {
+    const action1 = { effectId } = addEffect('minionId1', 'event', 'response', 'selector');
+    const minionState = minions(initialMinionState, action1);
+    expect(minionState.minionsById.minionId1.effects).to.eql([effectId]);
   });
   it('should handle FREEZE', () => {
     const action1 = freeze(1, 'minionId1');

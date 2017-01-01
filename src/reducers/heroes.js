@@ -1,12 +1,21 @@
 /* eslint-env node*/
 
-const { ADD_PLAYER, FATIGUE, FREEZE, KILL } = require('../actions');
+const { ADD_EFFECT, ADD_PLAYER, FATIGUE, FREEZE, KILL } = require('../actions');
 const merge = require('lodash/fp/merge');
 
 const initialState = {};
 
 const heroes = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_EFFECT:
+      if (!state.hasOwnProperty(action.characterId)) {
+        return state;
+      }
+      return merge(state, {
+        [action.characterId]: {
+          effects: [...state[action.characterId].effects, action.effectId],
+        },
+      });
     case ADD_PLAYER: {
       const { heroId, playerClass } = action;
       return merge(state, {

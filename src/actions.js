@@ -2,6 +2,7 @@
 
 const shortid = require('shortid');
 
+const ADD_EFFECT = exports.ADD_EFFECT = 'ADD_EFFECT';
 const ADD_PLAYER = exports.ADD_PLAYER = 'ADD_PLAYER';
 const ADD_TO_GRAVEYARD = exports.ADD_TO_GRAVEYARD = 'ADD_TO_GRAVEYARD';
 const BURN_CARD = exports.BURN_CARD = 'BURN_CARD';
@@ -12,6 +13,15 @@ const GAIN_MANA = exports.GAIN_MANA = 'GAIN_MANA';
 const KILL = exports.KILL = 'KILL';
 const SHUFFLE_DECKS = exports.SHUFFLE_DECKS = 'SHUFFLE_DECKS';
 const SUMMON = exports.SUMMON = 'SUMMON';
+
+exports.addEffect = (characterId, event, response, selector) => ({
+  type: ADD_EFFECT,
+  effectId: shortid.generate(),
+  characterId,
+  event,
+  response,
+  selector,
+});
 
 exports.addPlayer = (playerClass, deck, name) => ({
   type: ADD_PLAYER,
