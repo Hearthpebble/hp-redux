@@ -1,6 +1,6 @@
 /* eslint-env node*/
 
-const { KILL, SUMMON, FREEZE } = require('../actions');
+const { ADD_EFFECT, KILL, SUMMON, FREEZE } = require('../actions');
 
 const merge = require('lodash/fp/merge');
 const cards = require('../../data/cards.json');
@@ -12,6 +12,17 @@ const initialState = {
 
 const minions = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_EFFECT:
+      if (!state.minionsById.hasOwnProperty(action.characterId)) {
+        return state;
+      }
+      return merge(state, {
+        minionsById: {
+          [action.characterId]: {
+            effects: [...state.minionsById[action.characterId].effects, action.effectId],
+          },
+        },
+      });
     case KILL: {
       const copy = Object.assign({}, state);
       delete copy.minionsById[action.characterId];

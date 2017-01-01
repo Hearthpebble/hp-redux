@@ -4,6 +4,7 @@ const { expect } = require('chai');
 const configureStore = require('redux-mock-store').default;
 const reduxThunk = require('redux-thunk').default;
 const {
+  ADD_EFFECT, addEffect,
   ADD_PLAYER, addPlayer,
   ADD_TO_GRAVEYARD,
   BURN_CARD,
@@ -19,8 +20,21 @@ const {
 const mockStore = configureStore([reduxThunk]);
 
 describe('actions', () => {
+  describe('ADD_EFFECT', () => {
+    it('should create an action to add an effect', () => {
+      const action = { effectId } = addEffect('characterId1', 'event', 'response', 'selector');
+      expect(action).to.eql({
+        type: ADD_EFFECT,
+        effectId,
+        characterId: 'characterId1',
+        event: 'event',
+        response: 'response',
+        selector: 'selector',
+      });
+    });
+  });
   describe('ADD_PLAYER', () => {
-    it('should create an action to add a player ', () => {
+    it('should create an action to add a player', () => {
       const action = { playerId, heroId } = addPlayer('Mage', ['cardId1', 'cardId2', 'cardId3'], 'Bob');
       expect(action).to.eql({
         type: ADD_PLAYER,

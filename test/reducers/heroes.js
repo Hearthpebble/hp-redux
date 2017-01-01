@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const heroes = require('../../src/reducers/heroes');
-const { addPlayer, FATIGUE, KILL, freeze } = require('../../src/actions');
+const { addPlayer, addEffect, FATIGUE, KILL, freeze } = require('../../src/actions');
 const { initialHeroState } = require('../testData');
 
 describe('heroes reducer', () => {
@@ -11,10 +11,15 @@ describe('heroes reducer', () => {
       heroes(undefined, {})
     ).to.eql({});
   });
+  it('should handle ADD_EFFECT', () => {
+    const action1 = { effectId } = addEffect('heroId1', 'event', 'response', 'selector');
+    const heroState = heroes(initialHeroState, action1);
+    expect(heroState.heroId1.effects).to.eql([effectId]);
+  });
   it('should handle ADD_PLAYER', () => {
-    const action = { heroId: heroId1 } = addPlayer('Mage', ['cardId1', 'cardId2', 'cardId3'], 'Bob');
+    const action1 = { heroId: heroId1 } = addPlayer('Mage', ['cardId1', 'cardId2', 'cardId3'], 'Bob');
     const action2 = { heroId: heroId2 } = addPlayer('Druid', ['cardId1', 'cardId2', 'cardId3'], 'Tom');
-    let heroState = heroes(undefined, action);
+    let heroState = heroes(undefined, action1);
     expect(heroState[heroId1]).to.eql({
       id: heroId1,
       playerClass: 'Mage',
