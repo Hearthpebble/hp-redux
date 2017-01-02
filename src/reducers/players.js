@@ -7,6 +7,7 @@ const {
   BURN_CARD,
   DRAW_CARD,
   GAIN_MANA,
+  SHUFFLE_CARD,
   SHUFFLE_DECKS,
   SUMMON,
 } = require('../actions');
@@ -80,6 +81,25 @@ const players = (state = initialState, action) => {
       return merge(state, {
         [action.playerId]: {
           mana: newMana,
+        },
+      });
+    }
+    case SHUFFLE_CARD: {
+      // formula from MDN => Math.floor(Math.random() * (max - min + 1)) + min ... here, min = 0
+      const newIndex = Math.floor(Math.random() * (state[action.playerId].deck.length + 1));
+      const deckCopy = state[action.playerId].deck.slice(0);
+      deckCopy.splice(newIndex, 0, action.cardId);
+
+      const handCopy = state[action.playerId].hand.slice(0);
+
+      if (handCopy.indexOf(action.cardId) !== -1) {
+        handCopy.splice(handCopy.indexOf(action.cardId), 1);
+      }
+
+      return merge(state, {
+        [action.playerId]: {
+          deck: deckCopy,
+          hand: handCopy,
         },
       });
     }

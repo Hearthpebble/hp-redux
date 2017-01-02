@@ -11,6 +11,7 @@ const FATIGUE = exports.FATIGUE = 'FATIGUE';
 const FREEZE = exports.FREEZE = 'FREEZE';
 const GAIN_MANA = exports.GAIN_MANA = 'GAIN_MANA';
 const KILL = exports.KILL = 'KILL';
+const SHUFFLE_CARD = exports.SHUFFLE_CARD = 'SHUFFLE_CARD';
 const SHUFFLE_DECKS = exports.SHUFFLE_DECKS = 'SHUFFLE_DECKS';
 const SUMMON = exports.SUMMON = 'SUMMON';
 
@@ -82,6 +83,13 @@ exports.kill = characterId => (dispatch, getState) => {
     characterId,
   });
 };
+
+exports.shuffleCard = (cardId, playerId, removeFromHand) => ({
+  type: SHUFFLE_CARD,
+  cardId,
+  playerId,
+  removeFromHand,
+});
 
 exports.shuffleDecks = () => ({
   type: SHUFFLE_DECKS,

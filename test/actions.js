@@ -13,6 +13,7 @@ const {
   FREEZE, freeze,
   GAIN_MANA, gainMana,
   KILL, kill,
+  SHUFFLE_CARD, shuffleCard,
   SHUFFLE_DECKS, shuffleDecks,
   SUMMON, summon,
 } = require('../src/actions');
@@ -152,6 +153,17 @@ describe('actions', () => {
       expect(action).to.eql({
         type: KILL,
         characterId: 'minionId1',
+      });
+    });
+  });
+  describe('SHUFFLE_CARD', () => {
+    it('should create an action to shuffle a card into the deck', () => {
+      const action = shuffleCard('cardId', 'playerId', false);
+      expect(action).to.eql({
+        type: SHUFFLE_CARD,
+        cardId: 'cardId',
+        playerId: 'playerId',
+        removeFromHand: false,
       });
     });
   });
