@@ -101,10 +101,13 @@ describe('players reducer', () => {
     expect(playerState.playerId1).to.contain.all.keys(['id', 'name']);
   });
   it('should handle SHUFFLE_CARD', () => {
-    const action1 = shuffleCard('testCard1', 'playerId1', false);
+    const action1 = shuffleCard('testCard1', 'playerId3', false);
     const action2 = shuffleCard('testCard2', 'playerId3', true);
     let playerState = players(initialPlayerState, action1);
-    expect(playerState.playerId1.deck).to.include.members([
+    expect(playerState.playerId3.hand).to.include.members([
+      'c31', 'c32', 'c33', 'c34', 'testCard2',
+    ]);
+    expect(playerState.playerId3.deck).to.include.members([
       'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10',
       'c11', 'c12', 'c13', 'c14', 'c15', 'c16', 'c17', 'c18', 'c19', 'c20',
       'c21', 'c22', 'c23', 'c24', 'c25', 'c26', 'c27', 'c28', 'c29', 'c30',
@@ -118,7 +121,7 @@ describe('players reducer', () => {
       'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10',
       'c11', 'c12', 'c13', 'c14', 'c15', 'c16', 'c17', 'c18', 'c19', 'c20',
       'c21', 'c22', 'c23', 'c24', 'c25', 'c26', 'c27', 'c28', 'c29', 'c30',
-      'testCard2',
+      'testCard1', 'testCard2',
     ]);
   });
   it('should handle SHUFFLE_DECKS', () => {
