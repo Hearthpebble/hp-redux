@@ -63,7 +63,9 @@ exports.initialPlayerState = {
       'c11', 'c12', 'c13', 'c14', 'c15', 'c16', 'c17', 'c18', 'c19', 'c20',
       'c21', 'c22', 'c23', 'c24', 'c25', 'c26', 'c27', 'c28', 'c29', 'c30',
     ],
-    hand: [],
+    hand: [
+      'c31', 'c32', 'c33', 'c34', 'testCard2',
+    ],
     graveyard: [],
     secrets: [],
     effects: [],

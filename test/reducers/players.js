@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const players = require('../../src/reducers/players');
-const { addPlayer, ADD_TO_GRAVEYARD, BURN_CARD, DRAW_CARD, gainMana, shuffleDecks, summon } = require('../../src/actions');
+const { addPlayer, ADD_TO_GRAVEYARD, BURN_CARD, DRAW_CARD, gainMana, shuffleCard, shuffleDecks, summon } = require('../../src/actions');
 const { initialPlayerState } = require('../testData');
 
 describe('players reducer', () => {
@@ -99,6 +99,30 @@ describe('players reducer', () => {
     playerState = players(playerState, action3);
     expect(playerState.playerId1.mana).to.equal(10);
     expect(playerState.playerId1).to.contain.all.keys(['id', 'name']);
+  });
+  it('should handle SHUFFLE_CARD', () => {
+    const action1 = shuffleCard('testCard1', 'playerId2', false);
+    const action2 = shuffleCard('testCard2', 'playerId2', true);
+    let playerState = players(initialPlayerState, action1);
+    expect(playerState.playerId2.hand).to.include.members([
+      'c31', 'c32', 'c33', 'c34', 'testCard2',
+    ]);
+    expect(playerState.playerId2.deck).to.include.members([
+      'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10',
+      'c11', 'c12', 'c13', 'c14', 'c15', 'c16', 'c17', 'c18', 'c19', 'c20',
+      'c21', 'c22', 'c23', 'c24', 'c25', 'c26', 'c27', 'c28', 'c29', 'c30',
+      'testCard1',
+    ]);
+    playerState = players(playerState, action2);
+    expect(playerState.playerId2.hand).to.include.members([
+      'c31', 'c32', 'c33', 'c34',
+    ]);
+    expect(playerState.playerId2.deck).to.include.members([
+      'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10',
+      'c11', 'c12', 'c13', 'c14', 'c15', 'c16', 'c17', 'c18', 'c19', 'c20',
+      'c21', 'c22', 'c23', 'c24', 'c25', 'c26', 'c27', 'c28', 'c29', 'c30',
+      'testCard1', 'testCard2',
+    ]);
   });
   it('should handle SHUFFLE_DECKS', () => {
     const action = shuffleDecks();

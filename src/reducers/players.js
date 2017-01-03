@@ -1,12 +1,14 @@
 /* eslint-env node*/
 const { shuffle, mapValues } = require('lodash');
 const merge = require('lodash/fp/merge');
+const { randomInt } = require('../utils');
 const {
   ADD_PLAYER,
   ADD_TO_GRAVEYARD,
   BURN_CARD,
   DRAW_CARD,
   GAIN_MANA,
+  SHUFFLE_CARD,
   SHUFFLE_DECKS,
   SUMMON,
 } = require('../actions');
@@ -80,6 +82,30 @@ const players = (state = initialState, action) => {
       return merge(state, {
         [action.playerId]: {
           mana: newMana,
+        },
+      });
+    }
+    case SHUFFLE_CARD: {
+      const newIndex = randomInt(0, state[action.playerId].deck.length);
+      let handIndex = state[action.playerId].hand.length;
+        // by default the slice returns a copy of hand
+
+      if (action.removeFromHand === true) {
+        handIndex = state[action.playerId].hand.indexOf(action.cardId);
+          // sets up the removal logic in the return statement
+      }
+
+      return merge(state, {
+        [action.playerId]: {
+          deck: [
+            ...state[action.playerId].deck.slice(0, newIndex),
+            action.cardId,
+            ...state[action.playerId].deck.slice(newIndex),
+          ],
+          hand: [
+            ...state[action.playerId].hand.slice(0, handIndex),
+            ...state[action.playerId].hand.slice(handIndex + 1),
+          ],
         },
       });
     }
