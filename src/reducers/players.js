@@ -1,7 +1,7 @@
 /* eslint-env node*/
 const { shuffle, mapValues } = require('lodash');
 const merge = require('lodash/fp/merge');
-const randomIndex = require('../utils');
+const { randomInt } = require('../utils');
 const {
   ADD_PLAYER,
   ADD_TO_GRAVEYARD,
@@ -86,7 +86,7 @@ const players = (state = initialState, action) => {
       });
     }
     case SHUFFLE_CARD: {
-      const newIndex = randomIndex(0, state[action.playerId].deck.length);
+      const newIndex = randomInt(0, state[action.playerId].deck.length);
       let handIndex = state[action.playerId].hand.length;
         // by default the slice returns a copy of hand
 
