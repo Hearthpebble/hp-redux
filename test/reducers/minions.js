@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const minions = require('../../src/reducers/minions');
-const { addEffect, KILL, freeze, summon } = require('../../src/actions');
+const { addEffect, damage, KILL, freeze, summon } = require('../../src/actions');
 const { initialMinionState } = require('../testData');
 
 describe('minions reducer', () => {
@@ -18,6 +18,15 @@ describe('minions reducer', () => {
     const action1 = { effectId } = addEffect('minionId1', 'event', 'response', 'selector');
     const minionState = minions(initialMinionState, action1);
     expect(minionState.minionsById.minionId1.effects).to.eql([effectId]);
+  });
+  it('should handle DAMAGE', () => {
+    const action1 = damage(1, 'minionId1');
+    const action2 = damage(5, 'minionId1', 'minionId2', 'heroId1', 'heroId2');
+    let minionState = minions(initialMinionState, action1);
+    expect(minionState.minionsById.minionId1.health).to.equal(0);
+    minionState = minions(minionState, action2);
+    expect(minionState.minionsById.minionId1.health).to.equal(-5);
+    expect(minionState.minionsById.minionId2.health).to.equal(-2);
   });
   it('should handle FREEZE', () => {
     const action1 = freeze(1, 'minionId1');
