@@ -6,6 +6,7 @@ const ADD_EFFECT = exports.ADD_EFFECT = 'ADD_EFFECT';
 const ADD_PLAYER = exports.ADD_PLAYER = 'ADD_PLAYER';
 const ADD_TO_GRAVEYARD = exports.ADD_TO_GRAVEYARD = 'ADD_TO_GRAVEYARD';
 const BURN_CARD = exports.BURN_CARD = 'BURN_CARD';
+const DAMAGE = exports.DAMAGE = 'DAMAGE';
 const DRAW_CARD = exports.DRAW_CARD = 'DRAW_CARD';
 const FATIGUE = exports.FATIGUE = 'FATIGUE';
 const FREEZE = exports.FREEZE = 'FREEZE';
@@ -31,6 +32,12 @@ exports.addPlayer = (playerClass, deck, name) => ({
   playerClass,
   deck,
   name,
+});
+
+exports.damage = (amount, ...characterIds) => ({
+  type: DAMAGE,
+  amount,
+  characterIds,
 });
 
 exports.drawCard = playerId => (dispatch, getState) => {

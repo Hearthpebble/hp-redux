@@ -8,6 +8,7 @@ const {
   ADD_PLAYER, addPlayer,
   ADD_TO_GRAVEYARD,
   BURN_CARD,
+  DAMAGE, damage,
   DRAW_CARD, drawCard,
   FATIGUE,
   FREEZE, freeze,
@@ -44,6 +45,16 @@ describe('actions', () => {
         playerClass: 'Mage',
         deck: ['cardId1', 'cardId2', 'cardId3'],
         name: 'Bob',
+      });
+    });
+  });
+  describe('DAMAGE', () => {
+    it('should create an action to damage a character', () => {
+      const action = damage(3, 'mId1', 'hId1');
+      expect(action).to.eql({
+        type: DAMAGE,
+        amount: 3,
+        characterIds: ['mId1', 'hId1'],
       });
     });
   });

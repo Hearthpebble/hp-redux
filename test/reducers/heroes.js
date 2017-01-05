@@ -2,7 +2,7 @@
 
 const { expect } = require('chai');
 const heroes = require('../../src/reducers/heroes');
-const { addPlayer, addEffect, FATIGUE, KILL, freeze } = require('../../src/actions');
+const { addPlayer, addEffect, damage, FATIGUE, KILL, freeze } = require('../../src/actions');
 const { initialHeroState } = require('../testData');
 
 describe('heroes reducer', () => {
@@ -54,6 +54,17 @@ describe('heroes reducer', () => {
       auras: [],
     });
     expect(Object.keys(heroState)).to.have.lengthOf(2);
+  });
+  it('should handle DAMAGE', () => {
+    const action1 = damage(10, 'heroId2');
+    const action2 = damage(10, 'mId1', 'mId2', 'heroId2');
+    const action3 = damage(11, 'heroId2');
+    let heroState = heroes(initialHeroState, action1);
+    expect(heroState.heroId2.health).to.equal(20);
+    heroState = heroes(heroState, action2);
+    expect(heroState.heroId2.health).to.equal(10);
+    heroState = heroes(heroState, action3);
+    expect(heroState.heroId2.health).to.equal(-1);
   });
   it('should handle FATIGUE', () => {
     const action1 = {
