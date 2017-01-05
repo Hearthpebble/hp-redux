@@ -86,7 +86,7 @@ describe('actions', () => {
           playerId1: {
             deck: [],
             hand: [],
-            heroId: 'heroId1',
+            hero: 'heroId1',
           },
         },
       });

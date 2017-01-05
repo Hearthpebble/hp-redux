@@ -34,11 +34,11 @@ exports.addPlayer = (playerClass, deck, name) => ({
 });
 
 exports.drawCard = playerId => (dispatch, getState) => {
-  const { deck, hand, heroId } = getState().playersById[playerId];
+  const { deck, hand, hero } = getState().playersById[playerId];
   if (deck.length === 0) {
     dispatch({
       type: FATIGUE,
-      heroId,
+      heroId: hero,
     });
   } else if (hand.length === 10) {
     dispatch({

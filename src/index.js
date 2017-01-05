@@ -1,25 +1,25 @@
 /* eslint-env node*/
 
-const { createStore, applyMiddleware } = require('redux');
-const rootReducer = require('./reducers/index');
 const actions = require('./actions');
-const reduxThunk = require('redux-thunk').default;
 const configureStore = require('./configureStore').default;
-const { Observable } = require('rx');
+const { minionDied$ } = require('./observables');
+const { observableFromStore } = require('./utils');
 
-let store = configureStore();
+const store = configureStore();
 
-const store$ = Observable.create(observer =>
-  store.subscribe(() => observer.onNext(store.getState()))
+// creates Observable from the store
+const store$ = observableFromStore(store);
+
+// store$.subscribe(state => {
+//   console.log('state changed', state.minions.minionsById);
+// })
+
+minionDied$(store$).subscribe(minionId =>
+  store.dispatch(actions.kill(minionId))
 );
 
-// const minionDied$ = Observable.from(store.minions.minionsById)
-
-store$.subscribe(() => {
-  // console.log(JSON.stringify(store.getState(), null, 2));
-})
-
-// minionDied$.subscribe(() => {
-//   console.log("minion died")
-// })
-store.dispatch(actions.addPlayer('', '', ''))
+const p1 = { playerId } = actions.addPlayer('Mage', ['c1', 'c2', 'c3'], 'bob');
+store.dispatch(p1);
+store.dispatch(actions.summon(playerId, 0, 'CS2_231'));
+store.dispatch(actions.summon(playerId, 0, 'CS2_231'));
+store.dispatch(actions.summon(playerId, 0, 'EX1_556'));
