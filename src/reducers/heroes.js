@@ -1,6 +1,6 @@
 /* eslint-env node*/
 
-const { ADD_EFFECT, ADD_PLAYER, DAMAGE, FATIGUE, FREEZE, KILL } = require('../actions');
+const { ADD_EFFECT, ADD_PLAYER, DAMAGE, FATIGUE, FREEZE, HEAL, KILL } = require('../actions');
 const merge = require('lodash/fp/merge');
 
 const initialState = {};
@@ -71,6 +71,25 @@ const heroes = (state = initialState, action) => {
       });
 
       return merge(state, newFreeze);
+    }
+    case HEAL: {
+      const newHealth = {};
+
+      action.characterIds.forEach((id) => {
+        if (state.hasOwnProperty(id)) {
+          if (state[id].health + action.amount >= state[id].maxHealth) {
+            newHealth[id] = {
+              health: state[id].maxHealth,
+            };
+          } else {
+            newHealth[id] = {
+              health: state[id].health + action.amount,
+            };
+          }
+        }
+      });
+
+      return merge(state, newHealth);
     }
     case KILL: {
       const copy = Object.assign({}, state);

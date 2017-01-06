@@ -1,6 +1,6 @@
 /* eslint-env node*/
 
-const { ADD_EFFECT, DAMAGE, FREEZE, KILL, SUMMON } = require('../actions');
+const { ADD_EFFECT, DAMAGE, FREEZE, HEAL, KILL, SUMMON } = require('../actions');
 
 const merge = require('lodash/fp/merge');
 const cards = require('../../data/cards.json');
@@ -52,6 +52,27 @@ const minions = (state = initialState, action) => {
         }
       });
       return merge(state, newFreeze);
+    }
+    case HEAL: {
+      const newHealth = {
+        minionsById: {},
+      };
+
+      action.characterIds.forEach((id) => {
+        if (state.minionsById.hasOwnProperty(id)) {
+          if (state.minionsById[id].health + action.amount > state.minionsById[id].maxHealth) {
+            newHealth.minionsById[id] = {
+              health: state.minionsById[id].maxHealth,
+            };
+          } else {
+            newHealth.minionsById[id] = {
+              health: state.minionsById[id].health + action.amount,
+            };
+          }
+        }
+      });
+
+      return merge(state, newHealth);
     }
     case KILL: {
       const copy = Object.assign({}, state);

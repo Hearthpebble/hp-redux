@@ -11,6 +11,7 @@ const DRAW_CARD = exports.DRAW_CARD = 'DRAW_CARD';
 const FATIGUE = exports.FATIGUE = 'FATIGUE';
 const FREEZE = exports.FREEZE = 'FREEZE';
 const GAIN_MANA = exports.GAIN_MANA = 'GAIN_MANA';
+const HEAL = exports.HEAL = 'HEAL';
 const KILL = exports.KILL = 'KILL';
 const SHUFFLE_CARD = exports.SHUFFLE_CARD = 'SHUFFLE_CARD';
 const SHUFFLE_DECKS = exports.SHUFFLE_DECKS = 'SHUFFLE_DECKS';
@@ -70,6 +71,12 @@ exports.gainMana = (playerId, mana = 1) => ({
   type: GAIN_MANA,
   playerId,
   mana,
+});
+
+exports.heal = (amount, ...characterIds) => ({
+  type: HEAL,
+  amount,
+  characterIds,
 });
 
 exports.kill = characterId => (dispatch, getState) => {
