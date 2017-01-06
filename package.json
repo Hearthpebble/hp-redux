@@ -1,9 +1,9 @@
 {
   "name": "hp-redux",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "patch": "7.0.0.15590",
-  "description": "",
-  "main": "index.js",
+  "description": "Hearthstone simulator",
+  "main": "src/index.js",
   "scripts": {
     "test": "nyc mocha \"test/**/*.js\"",
     "lint": "eslint . || exit 0"
@@ -13,8 +13,8 @@
     "url": "git+https://github.com/Bebersohl/hp-redux.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Brandon Ebersohl",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Bebersohl/hp-redux/issues"
   },
