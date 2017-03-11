@@ -37,43 +37,47 @@ exports.initialMinionState = {
 };
 
 exports.initialPlayerState = {
-  playerId1: {
-    id: 'playerId1',
-    hero: 'heroId1',
-    deck: [
-      'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10',
-      'c11', 'c12', 'c13', 'c14', 'c15', 'c16', 'c17', 'c18', 'c19', 'c20',
-      'c21', 'c22', 'c23', 'c24', 'c25', 'c26', 'c27', 'c28', 'c29', 'c30',
-    ],
-    hand: [],
-    graveyard: [],
-    secrets: [],
-    effects: [],
-    auras: [],
-    minions: [],
-    mana: 0,
-    maxMana: 10,
-    name: 'Jimmy',
-  },
-  playerId2: {
-    id: 'playerId2',
-    hero: 'heroId2',
-    deck: [
-      'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10',
-      'c11', 'c12', 'c13', 'c14', 'c15', 'c16', 'c17', 'c18', 'c19', 'c20',
-      'c21', 'c22', 'c23', 'c24', 'c25', 'c26', 'c27', 'c28', 'c29', 'c30',
-    ],
-    hand: [
-      'c31', 'c32', 'c33', 'c34', 'testCard2',
-    ],
-    graveyard: [],
-    secrets: [],
-    effects: [],
-    auras: [],
-    minions: [],
-    mana: 0,
-    maxMana: 10,
-    name: 'Walker',
+  allPlayers: [],
+  activePlayer: 0,
+  playersById: {
+    playerId1: {
+      id: 'playerId1',
+      hero: 'heroId1',
+      deck: [
+        'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10',
+        'c11', 'c12', 'c13', 'c14', 'c15', 'c16', 'c17', 'c18', 'c19', 'c20',
+        'c21', 'c22', 'c23', 'c24', 'c25', 'c26', 'c27', 'c28', 'c29', 'c30',
+      ],
+      hand: [],
+      graveyard: [],
+      secrets: [],
+      effects: [],
+      auras: [],
+      minions: [],
+      mana: 0,
+      maxMana: 10,
+      name: 'Jimmy',
+    },
+    playerId2: {
+      id: 'playerId2',
+      hero: 'heroId2',
+      deck: [
+        'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10',
+        'c11', 'c12', 'c13', 'c14', 'c15', 'c16', 'c17', 'c18', 'c19', 'c20',
+        'c21', 'c22', 'c23', 'c24', 'c25', 'c26', 'c27', 'c28', 'c29', 'c30',
+      ],
+      hand: [
+        'c31', 'c32', 'c33', 'c34', 'testCard2',
+      ],
+      graveyard: [],
+      secrets: [],
+      effects: [],
+      auras: [],
+      minions: [],
+      mana: 0,
+      maxMana: 10,
+      name: 'Walker',
+    },
   },
 };
 
