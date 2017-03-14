@@ -6,13 +6,17 @@
   "main": "src/index.js",
   "scripts": {
     "test": "nyc mocha \"test/**/*.js\"",
-    "lint": "eslint . || exit 0"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Bebersohl/hp-redux.git"
   },
-  "keywords": [],
+  "keywords": [
+    "Hearthstone",
+    "Hearthpebble",
+    "redux"
+  ],
   "author": "Brandon Ebersohl",
   "license": "MIT",
   "bugs": {
