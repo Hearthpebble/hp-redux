@@ -1,6 +1,6 @@
 {
   "name": "hp-redux",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "patch": "7.0.0.15590",
   "description": "Hearthstone simulator",
   "main": "src/index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Bebersohl/hp-redux.git"
+    "url": "git+https://github.com/Hearthpebble/hp-redux.git"
   },
   "keywords": [
     "Hearthstone",
@@ -20,9 +20,9 @@
   "author": "Brandon Ebersohl",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Bebersohl/hp-redux/issues"
+    "url": "https://github.com/Hearthpebble/hp-redux/issues"
   },
-  "homepage": "https://github.com/Bebersohl/hp-redux#readme",
+  "homepage": "https://github.com/Hearthpebble/hp-redux#readme",
   "dependencies": {
     "lodash": "^4.17.2",
     "redux": "^3.6.0",
