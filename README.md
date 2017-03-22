@@ -1,6 +1,6 @@
 # hp-redux 
 [![Build Status](https://travis-ci.org/Hearthpebble/hp-redux.svg?branch=master)](https://travis-ci.org/Hearthpebble/hp-redux)
-[![Coverage Status](https://coveralls.io/repos/Bebersohl/hp-redux/badge.svg?branch=master)](https://coveralls.io/r/Bebersohl/hp-redux?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/Hearthpebble/hp-redux/badge.svg?branch=master)](https://coveralls.io/github/Hearthpebble/hp-redux?branch=master)
 
 hp-redux is a Hearthstone simulator.
 
