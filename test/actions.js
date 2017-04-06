@@ -13,6 +13,7 @@ const {
   FATIGUE,
   FREEZE, freeze,
   GAIN_MANA, gainMana,
+  HEAL, heal,
   KILL, kill,
   SHUFFLE_CARD, shuffleCard,
   SHUFFLE_DECKS, shuffleDecks,
@@ -126,6 +127,16 @@ describe('actions', () => {
         type: GAIN_MANA,
         playerId: 'playerId',
         mana: 5,
+      });
+    });
+  });
+  describe('HEAL', () => {
+    it('should create an action to heal a character', () => {
+      const action = heal(3, 'mId1', 'hId1');
+      expect(action).to.eql({
+        type: HEAL,
+        amount: 3,
+        characterIds: ['mId1', 'hId1'],
       });
     });
   });
